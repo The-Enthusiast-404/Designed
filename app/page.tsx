@@ -5,6 +5,7 @@ import { fabric } from "fabric";
 
 const App = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
+  const [color, setColor] = useState("#2BEBC8");
 
   useEffect(() => {
     const c = new fabric.Canvas("canvas", {
@@ -88,6 +89,15 @@ const App = () => {
     canvas?.requestRenderAll();
   };
 
+  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.set({ fill: event.target.value });
+      canvas?.requestRenderAll();
+      setColor(event.target.value); // Update the color state
+    }
+  };
+
   return (
     <div>
       <select
@@ -125,6 +135,13 @@ const App = () => {
         <option value="Line">Line</option>
         <option value="Polygon">Polygon</option>
       </select>
+      <input
+        type="color"
+        id="colorPicker"
+        name="colorPicker"
+        value={color}
+        onChange={handleColorChange}
+      />
       <canvas id="canvas" />
     </div>
   );
