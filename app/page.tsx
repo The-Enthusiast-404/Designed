@@ -6,6 +6,7 @@ import { fabric } from "fabric";
 const App = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
   const [color, setColor] = useState("#2BEBC8");
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     const c = new fabric.Canvas("canvas", {
@@ -130,8 +131,25 @@ const App = () => {
     }
   };
 
+  const addImage = (canvas?: fabric.Canvas, url?: string) => {
+    if (!url) return;
+    fabric.Image.fromURL(url, function (img) {
+      img.scaleToWidth(100);
+      img.scaleToHeight(100);
+      canvas?.add(img);
+      canvas?.requestRenderAll();
+    });
+  };
+
   return (
     <div>
+      <input
+        type="text"
+        placeholder="Paste image URL here"
+        value={imageUrl}
+        onChange={(e) => setImageUrl(e.target.value)}
+      />
+      <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
       <button onClick={bringToFront}>Bring to Front</button>
       <button onClick={sendToBack}>Send to Back</button>
       <button onClick={bringForward}>Bring Forward</button>
