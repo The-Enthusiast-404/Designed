@@ -151,6 +151,21 @@ const App = () => {
     canvas?.requestRenderAll();
   };
 
+  const enableDrawing = (canvas?: fabric.Canvas) => {
+    if (canvas) {
+      canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+      canvas.freeDrawingBrush.width = 5; // Set the width of the brush
+      canvas.freeDrawingBrush.color = "#000000"; // Set the color of the brush
+    }
+  };
+
+  const disableDrawing = (canvas?: fabric.Canvas) => {
+    if (canvas) {
+      canvas.isDrawingMode = false;
+    }
+  };
+
   return (
     <div>
       <input
@@ -165,6 +180,8 @@ const App = () => {
       <button onClick={sendToBack}>Send to Back</button>
       <button onClick={bringForward}>Bring Forward</button>
       <button onClick={sendBackwards}>Send Backwards</button>
+      <button onClick={() => enableDrawing(canvas)}>Enable Drawing</button>
+      <button onClick={() => disableDrawing(canvas)}>Disable Drawing</button>
       <select
         className="bg-black text-white p-2 rounded"
         onChange={(event) => {
