@@ -98,8 +98,44 @@ const App = () => {
     }
   };
 
+  const bringToFront = () => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.bringToFront();
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const sendToBack = () => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.sendToBack();
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const bringForward = () => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.bringForward();
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const sendBackwards = () => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.sendBackwards();
+      canvas?.requestRenderAll();
+    }
+  };
+
   return (
     <div>
+      <button onClick={bringToFront}>Bring to Front</button>
+      <button onClick={sendToBack}>Send to Back</button>
+      <button onClick={bringForward}>Bring Forward</button>
+      <button onClick={sendBackwards}>Send Backwards</button>
       <select
         className="bg-black text-white p-2 rounded"
         onChange={(event) => {
