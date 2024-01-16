@@ -141,6 +141,16 @@ const App = () => {
     });
   };
 
+  const addText = (canvas?: fabric.Canvas) => {
+    const text = new fabric.Textbox("Enter text here", {
+      width: 200,
+      height: 280,
+      stroke: "#2BEBC8",
+    });
+    canvas?.add(text);
+    canvas?.requestRenderAll();
+  };
+
   return (
     <div>
       <input
@@ -149,6 +159,7 @@ const App = () => {
         value={imageUrl}
         onChange={(e) => setImageUrl(e.target.value)}
       />
+      <button onClick={() => addText(canvas)}>Add Text</button>
       <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
       <button onClick={bringToFront}>Bring to Front</button>
       <button onClick={sendToBack}>Send to Back</button>
