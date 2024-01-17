@@ -7,6 +7,13 @@ const App = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
   const [color, setColor] = useState("#2BEBC8");
   const [imageUrl, setImageUrl] = useState("");
+  const [brushWidth, setBrushWidth] = useState(5);
+
+  useEffect(() => {
+    if (canvas?.isDrawingMode) {
+      enableDrawing(canvas);
+    }
+  }, [brushWidth]);
 
   useEffect(() => {
     const c = new fabric.Canvas("canvas", {
@@ -155,7 +162,7 @@ const App = () => {
     if (canvas) {
       canvas.isDrawingMode = true;
       canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-      canvas.freeDrawingBrush.width = 5; // Set the width of the brush
+      canvas.freeDrawingBrush.width = brushWidth; // Set the width of the brush
       canvas.freeDrawingBrush.color = "#000000"; // Set the color of the brush
     }
   };
@@ -168,6 +175,12 @@ const App = () => {
 
   return (
     <div>
+      <select onChange={(event) => setBrushWidth(parseInt(event.target.value))}>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
       <input
         type="text"
         placeholder="Paste image URL here"
