@@ -8,6 +8,7 @@ const App = () => {
   const [color, setColor] = useState("#2BEBC8");
   const [imageUrl, setImageUrl] = useState("");
   const [brushWidth, setBrushWidth] = useState(5);
+  const [brushColor, setBrushColor] = useState("#000000");
 
   useEffect(() => {
     if (canvas?.isDrawingMode) {
@@ -106,6 +107,17 @@ const App = () => {
     }
   };
 
+  const handleBrushColorChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.set({ stroke: event.target.value });
+      canvas?.requestRenderAll();
+      setBrushColor(event.target.value); // Update the color state
+    }
+  };
+
   const bringToFront = () => {
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
@@ -163,7 +175,7 @@ const App = () => {
       canvas.isDrawingMode = true;
       canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
       canvas.freeDrawingBrush.width = brushWidth; // Set the width of the brush
-      canvas.freeDrawingBrush.color = "#000000"; // Set the color of the brush
+      canvas.freeDrawingBrush.color = brushColor; // Set the color of the brush
     }
   };
 
@@ -181,6 +193,13 @@ const App = () => {
         <option value="15">15</option>
         <option value="20">20</option>
       </select>
+      <input
+        type="color"
+        id="brushColor"
+        name="brushColor"
+        value={brushColor}
+        onChange={handleBrushColorChange}
+      />
       <input
         type="text"
         placeholder="Paste image URL here"
