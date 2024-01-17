@@ -17,6 +17,12 @@ const App = () => {
   }, [brushWidth]);
 
   useEffect(() => {
+    if (canvas?.isDrawingMode) {
+      enableDrawing(canvas);
+    }
+  }, [brushColor]);
+
+  useEffect(() => {
     const c = new fabric.Canvas("canvas", {
       height: 400,
       width: 800,
@@ -115,6 +121,10 @@ const App = () => {
       selectedObject.set({ stroke: event.target.value });
       canvas?.requestRenderAll();
       setBrushColor(event.target.value); // Update the color state
+    }
+    setBrushColor(event.target.value); // Update the brush color state
+    if (canvas?.isDrawingMode) {
+      canvas.freeDrawingBrush.color = event.target.value; // Update the color of the brush directly
     }
   };
 
