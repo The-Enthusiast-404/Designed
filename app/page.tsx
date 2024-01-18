@@ -10,6 +10,7 @@ const App = () => {
   const [brushWidth, setBrushWidth] = useState(5);
   const [brushColor, setBrushColor] = useState("#000000");
   const [strokeColor, setStrokeColor] = useState("#000000");
+  const [strokeWidth, setStrokeWidth] = useState(1);
 
   useEffect(() => {
     if (canvas?.isDrawingMode) {
@@ -140,6 +141,17 @@ const App = () => {
     }
   };
 
+  const handleStrokeWidthChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.set({ strokeWidth: parseInt(event.target.value) });
+      canvas?.requestRenderAll();
+    }
+    setStrokeWidth(parseInt(event.target.value));
+  };
+
   const bringToFront = () => {
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
@@ -209,6 +221,19 @@ const App = () => {
 
   return (
     <div>
+      <select
+        id="strokeWidth"
+        name="strokeWidth"
+        value={strokeWidth}
+        onChange={(event) => handleStrokeWidthChange(event)}
+      >
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        {/* Add more options as needed */}
+      </select>
       <input
         type="color"
         id="strokeColor"
