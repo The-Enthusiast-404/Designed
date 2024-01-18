@@ -9,6 +9,7 @@ const App = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [brushWidth, setBrushWidth] = useState(5);
   const [brushColor, setBrushColor] = useState("#000000");
+  const [strokeColor, setStrokeColor] = useState("#000000");
 
   useEffect(() => {
     if (canvas?.isDrawingMode) {
@@ -47,7 +48,7 @@ const App = () => {
     const rect = new fabric.Rect({
       height: 280,
       width: 200,
-      stroke: "#2BEBC8",
+      stroke: strokeColor,
     });
     canvas?.add(rect);
     canvas?.requestRenderAll();
@@ -56,7 +57,7 @@ const App = () => {
   const addCircle = (canvas?: fabric.Canvas) => {
     const circle = new fabric.Circle({
       radius: 100,
-      stroke: "#2BEBC8",
+      stroke: strokeColor,
     });
     canvas?.add(circle);
     canvas?.requestRenderAll();
@@ -66,7 +67,7 @@ const App = () => {
     const triangle = new fabric.Triangle({
       width: 200,
       height: 280,
-      stroke: "#2BEBC8",
+      stroke: strokeColor,
     });
     canvas?.add(triangle);
     canvas?.requestRenderAll();
@@ -75,7 +76,7 @@ const App = () => {
     const ellipse = new fabric.Ellipse({
       rx: 100,
       ry: 50,
-      stroke: "#2BEBC8",
+      stroke: strokeColor,
     });
     canvas?.add(ellipse);
     canvas?.requestRenderAll();
@@ -97,7 +98,7 @@ const App = () => {
         { x: 0, y: 50 },
       ],
       {
-        stroke: "#2BEBC8",
+        stroke: strokeColor,
       }
     );
     canvas?.add(polygon);
@@ -111,6 +112,17 @@ const App = () => {
       canvas?.requestRenderAll();
       setColor(event.target.value); // Update the color state
     }
+  };
+
+  const handleStrokeColorChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.set({ stroke: event.target.value });
+      canvas?.requestRenderAll();
+    }
+    setStrokeColor(event.target.value);
   };
 
   const handleBrushColorChange = (
@@ -197,6 +209,13 @@ const App = () => {
 
   return (
     <div>
+      <input
+        type="color"
+        id="strokeColor"
+        name="strokeColor"
+        value={strokeColor}
+        onChange={handleStrokeColorChange}
+      />
       <select onChange={(event) => setBrushWidth(parseInt(event.target.value))}>
         <option value="5">5</option>
         <option value="10">10</option>
