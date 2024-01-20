@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { fabric } from "fabric";
+import MySvg from "../public/assets/browse-svgrepo-com.svg";
 
 const App = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -219,8 +220,24 @@ const App = () => {
     }
   };
 
+  const addSVG = (canvas?: fabric.Canvas, url?: string) => {
+    if (!url) return;
+    fabric.loadSVGFromURL(url, (objects, options) => {
+      const obj = fabric.util.groupSVGElements(objects, options);
+      obj.scaleToWidth(100);
+      obj.scaleToHeight(100);
+      canvas?.add(obj).renderAll();
+    });
+  };
+
   return (
     <div>
+      <button onClick={() => addSVG(canvas, "/assets/browse-svgrepo-com.svg")}>
+        Add My SVG
+      </button>
+      <button onClick={() => addSVG(canvas, "/assets/date-svgrepo-com.svg")}>
+        Add Another SVG
+      </button>
       <select
         id="strokeWidth"
         name="strokeWidth"
