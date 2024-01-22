@@ -6,8 +6,14 @@ const LandingPage = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <nav className="bg-white p-4">
+    <div
+      className="flex flex-col min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8"
+      style={{ background: "linear-gradient(to right, #667eea, #764ba2)" }}
+    >
+      <nav
+        className="bg-white p-4"
+        style={{ background: "linear-gradient(to right, #667eea, #764ba2)" }}
+      >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="flex items-center px-2 lg:px-0 xl:w-1/4 xl:px-2">
@@ -140,9 +146,12 @@ const LandingPage = () => {
           </div>
         </div>
       </main>
-      <footer className="bg-white p-4">
+      <footer
+        className="bg-white p-4"
+        style={{ background: "linear-gradient(to right, #667eea, #764ba2)" }}
+      >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500 text-sm">
+          <p className="text-center text-white-500 text-sm">
             &copy; 2024 Canva Open Source Alternative. All rights reserved.
           </p>
         </div>
