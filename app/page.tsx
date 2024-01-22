@@ -231,103 +231,121 @@ const App = () => {
   };
 
   return (
-    <div>
-      <button onClick={() => addSVG(canvas, "/assets/browse-svgrepo-com.svg")}>
-        Add My SVG
-      </button>
-      <button onClick={() => addSVG(canvas, "/assets/date-svgrepo-com.svg")}>
-        Add Another SVG
-      </button>
-      <select
-        id="strokeWidth"
-        name="strokeWidth"
-        value={strokeWidth}
-        onChange={(event) => handleStrokeWidthChange(event)}
-      >
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        {/* Add more options as needed */}
-      </select>
-      <input
-        type="color"
-        id="strokeColor"
-        name="strokeColor"
-        value={strokeColor}
-        onChange={handleStrokeColorChange}
-      />
-      <select onChange={(event) => setBrushWidth(parseInt(event.target.value))}>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-      </select>
-      <input
-        type="color"
-        id="brushColor"
-        name="brushColor"
-        value={brushColor}
-        onChange={handleBrushColorChange}
-      />
-      <input
-        type="text"
-        placeholder="Paste image URL here"
-        value={imageUrl}
-        onChange={(e) => setImageUrl(e.target.value)}
-      />
-      <button onClick={() => addText(canvas)}>Add Text</button>
-      <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
-      <button onClick={bringToFront}>Bring to Front</button>
-      <button onClick={sendToBack}>Send to Back</button>
-      <button onClick={bringForward}>Bring Forward</button>
-      <button onClick={sendBackwards}>Send Backwards</button>
-      <button onClick={() => enableDrawing(canvas)}>Enable Drawing</button>
-      <button onClick={() => disableDrawing(canvas)}>Disable Drawing</button>
-      <select
-        className="bg-black text-white p-2 rounded"
-        onChange={(event) => {
-          switch (event.target.value) {
-            case "Rectangle":
-              addRect(canvas);
-              break;
-            case "Circle":
-              addCircle(canvas);
-              break;
-            case "Triangle":
-              addTriangle(canvas);
-              break;
-            case "Ellipse":
-              addEllipse(canvas);
-              break;
-            case "Line":
-              addLine(canvas);
-              break;
-            case "Polygon":
-              addPolygon(canvas);
-              break;
-            default:
-              break;
-          }
-        }}
-      >
-        <option value="">Select shape</option>
-        <option value="Rectangle">Rectangle</option>
-        <option value="Circle">Circle</option>
-        <option value="Triangle">Triangle</option>
-        <option value="Ellipse">Ellipse</option>
-        <option value="Line">Line</option>
-        <option value="Polygon">Polygon</option>
-      </select>
-      <input
-        type="color"
-        id="colorPicker"
-        name="colorPicker"
-        value={color}
-        onChange={handleColorChange}
-      />
-      <canvas id="canvas" />
+    <div className="flex">
+      <div className="flex flex-col p-4 space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <button
+            onClick={() => addSVG(canvas, "/assets/browse-svgrepo-com.svg")}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Add My SVG
+          </button>
+          <button
+            onClick={() => addSVG(canvas, "/assets/date-svgrepo-com.svg")}
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
+          >
+            Add Another SVG
+          </button>
+          <select
+            id="strokeWidth"
+            name="strokeWidth"
+            value={strokeWidth}
+            onChange={(event) => handleStrokeWidthChange(event)}
+            className="px-4 py-2 border rounded bg-white text-black"
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            {/* Add more options as needed */}
+          </select>
+          <input
+            type="color"
+            id="strokeColor"
+            name="strokeColor"
+            value={strokeColor}
+            onChange={handleStrokeColorChange}
+          />
+          <select
+            className="px-4 py-2 border rounded bg-white text-black"
+            onChange={(event) => setBrushWidth(parseInt(event.target.value))}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+          <input
+            type="color"
+            id="brushColor"
+            name="brushColor"
+            value={brushColor}
+            onChange={handleBrushColorChange}
+          />
+          <input
+            type="text"
+            placeholder="Paste image URL here"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
+          <button onClick={() => addText(canvas)}>Add Text</button>
+          <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
+          <button onClick={bringToFront}>Bring to Front</button>
+          <button onClick={sendToBack}>Send to Back</button>
+          <button onClick={bringForward}>Bring Forward</button>
+          <button onClick={sendBackwards}>Send Backwards</button>
+          <button onClick={() => enableDrawing(canvas)}>Enable Drawing</button>
+          <button onClick={() => disableDrawing(canvas)}>
+            Disable Drawing
+          </button>
+          <select
+            className="px-4 py-2 border rounded bg-white text-black"
+            onChange={(event) => {
+              switch (event.target.value) {
+                case "Rectangle":
+                  addRect(canvas);
+                  break;
+                case "Circle":
+                  addCircle(canvas);
+                  break;
+                case "Triangle":
+                  addTriangle(canvas);
+                  break;
+                case "Ellipse":
+                  addEllipse(canvas);
+                  break;
+                case "Line":
+                  addLine(canvas);
+                  break;
+                case "Polygon":
+                  addPolygon(canvas);
+                  break;
+                default:
+                  break;
+              }
+            }}
+          >
+            <option value="">Select shape</option>
+            <option value="Rectangle">Rectangle</option>
+            <option value="Circle">Circle</option>
+            <option value="Triangle">Triangle</option>
+            <option value="Ellipse">Ellipse</option>
+            <option value="Line">Line</option>
+            <option value="Polygon">Polygon</option>
+          </select>
+          <input
+            type="color"
+            id="colorPicker"
+            name="colorPicker"
+            value={color}
+            onChange={handleColorChange}
+          />
+        </div>
+      </div>
+      <div className="flex justify-center items-center flex-grow">
+        <canvas id="canvas" />
+      </div>
     </div>
   );
 };
