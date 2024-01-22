@@ -12,6 +12,7 @@ const App = () => {
   const [brushColor, setBrushColor] = useState("#000000");
   const [strokeColor, setStrokeColor] = useState("#000000");
   const [strokeWidth, setStrokeWidth] = useState(1);
+  const [isDrawingEnabled, setIsDrawingEnabled] = useState(false);
 
   useEffect(() => {
     if (canvas?.isDrawingMode) {
@@ -220,6 +221,18 @@ const App = () => {
     }
   };
 
+  const toggleDrawing = (canvas?: fabric.Canvas) => {
+    if (canvas) {
+      canvas.isDrawingMode = !canvas.isDrawingMode;
+      setIsDrawingEnabled(canvas.isDrawingMode);
+      if (canvas.isDrawingMode) {
+        canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+        canvas.freeDrawingBrush.width = brushWidth; // Set the width of the brush
+        canvas.freeDrawingBrush.color = brushColor; // Set the color of the brush
+      }
+    }
+  };
+
   const addSVG = (canvas?: fabric.Canvas, url?: string) => {
     if (!url) return;
     fabric.loadSVGFromURL(url, (objects, options) => {
@@ -260,13 +273,21 @@ const App = () => {
             <option value="5">5</option>
             {/* Add more options as needed */}
           </select>
-          <input
-            type="color"
-            id="strokeColor"
-            name="strokeColor"
-            value={strokeColor}
-            onChange={handleStrokeColorChange}
-          />
+          <div>
+            <input
+              type="color"
+              id="strokeColor"
+              name="strokeColor"
+              value={strokeColor}
+              onChange={handleStrokeColorChange}
+            />
+            <label
+              htmlFor="strokeColor"
+              className="block text-sm text-white-700"
+            >
+              Choose stroke color
+            </label>
+          </div>
           <select
             className="px-4 py-2 border rounded bg-white text-black"
             onChange={(event) => setBrushWidth(parseInt(event.target.value))}
@@ -276,13 +297,21 @@ const App = () => {
             <option value="15">15</option>
             <option value="20">20</option>
           </select>
-          <input
-            type="color"
-            id="brushColor"
-            name="brushColor"
-            value={brushColor}
-            onChange={handleBrushColorChange}
-          />
+          <div>
+            <input
+              type="color"
+              id="brushColor"
+              name="brushColor"
+              value={brushColor}
+              onChange={handleBrushColorChange}
+            />
+            <label
+              htmlFor="brushColor"
+              className="block text-sm text-white-700"
+            >
+              Choose brush color
+            </label>
+          </div>
           <input
             type="text"
             placeholder="Paste image URL here"
@@ -295,9 +324,8 @@ const App = () => {
           <button onClick={sendToBack}>Send to Back</button>
           <button onClick={bringForward}>Bring Forward</button>
           <button onClick={sendBackwards}>Send Backwards</button>
-          <button onClick={() => enableDrawing(canvas)}>Enable Drawing</button>
-          <button onClick={() => disableDrawing(canvas)}>
-            Disable Drawing
+          <button onClick={() => toggleDrawing(canvas)}>
+            {isDrawingEnabled ? "Disable Drawing" : "Enable Drawing"}
           </button>
           <select
             className="px-4 py-2 border rounded bg-white text-black"
@@ -334,13 +362,21 @@ const App = () => {
             <option value="Line">Line</option>
             <option value="Polygon">Polygon</option>
           </select>
-          <input
-            type="color"
-            id="colorPicker"
-            name="colorPicker"
-            value={color}
-            onChange={handleColorChange}
-          />
+          <div>
+            <input
+              type="color"
+              id="colorPicker"
+              name="colorPicker"
+              value={color}
+              onChange={handleColorChange}
+            />
+            <label
+              htmlFor="colorPicker"
+              className="block text-sm text-white-700"
+            >
+              Choose shape color
+            </label>
+          </div>
         </div>
       </div>
       <div className="flex justify-center items-center flex-grow">
