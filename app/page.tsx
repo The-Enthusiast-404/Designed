@@ -264,7 +264,7 @@ const App = () => {
             name="strokeWidth"
             value={strokeWidth}
             onChange={(event) => handleStrokeWidthChange(event)}
-            className="px-4 py-2 border rounded bg-white text-black"
+            className="px-4 py-2 border rounded bg-white text-black h-10"
           >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -289,7 +289,7 @@ const App = () => {
             </label>
           </div>
           <select
-            className="px-4 py-2 border rounded bg-white text-black"
+            className="px-4 py-2 border rounded bg-white text-black h-10"
             onChange={(event) => setBrushWidth(parseInt(event.target.value))}
           >
             <option value="5">5</option>
@@ -328,7 +328,7 @@ const App = () => {
             {isDrawingEnabled ? "Disable Drawing" : "Enable Drawing"}
           </button>
           <select
-            className="px-4 py-2 border rounded bg-white text-black"
+            className="px-4 py-2 border rounded bg-white text-black h-10"
             onChange={(event) => {
               switch (event.target.value) {
                 case "Rectangle":
