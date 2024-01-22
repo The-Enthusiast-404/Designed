@@ -1,389 +1,154 @@
-"use client"; // next.js app router
+"use client";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
-import React, { useState, useEffect } from "react";
-import { fabric } from "fabric";
-import MySvg from "../public/assets/browse-svgrepo-com.svg";
-
-const App = () => {
-  const [canvas, setCanvas] = useState<fabric.Canvas>();
-  const [color, setColor] = useState("#2BEBC8");
-  const [imageUrl, setImageUrl] = useState("");
-  const [brushWidth, setBrushWidth] = useState(5);
-  const [brushColor, setBrushColor] = useState("#000000");
-  const [strokeColor, setStrokeColor] = useState("#000000");
-  const [strokeWidth, setStrokeWidth] = useState(1);
-  const [isDrawingEnabled, setIsDrawingEnabled] = useState(false);
-
-  useEffect(() => {
-    if (canvas?.isDrawingMode) {
-      enableDrawing(canvas);
-    }
-  }, [brushWidth]);
-
-  useEffect(() => {
-    if (canvas?.isDrawingMode) {
-      enableDrawing(canvas);
-    }
-  }, [brushColor]);
-
-  useEffect(() => {
-    const c = new fabric.Canvas("canvas", {
-      height: 400,
-      width: 800,
-      backgroundColor: "white",
-    });
-
-    // settings for all canvas in the app
-    fabric.Object.prototype.transparentCorners = false;
-    fabric.Object.prototype.cornerColor = "#2BEBC8";
-    fabric.Object.prototype.cornerStyle = "rect";
-    fabric.Object.prototype.cornerStrokeColor = "#2BEBC8";
-    fabric.Object.prototype.cornerSize = 6;
-
-    setCanvas(c);
-
-    return () => {
-      c.dispose();
-    };
-  }, []);
-
-  const addRect = (canvas?: fabric.Canvas) => {
-    const rect = new fabric.Rect({
-      height: 280,
-      width: 200,
-      stroke: strokeColor,
-    });
-    canvas?.add(rect);
-    canvas?.requestRenderAll();
-  };
-
-  const addCircle = (canvas?: fabric.Canvas) => {
-    const circle = new fabric.Circle({
-      radius: 100,
-      stroke: strokeColor,
-    });
-    canvas?.add(circle);
-    canvas?.requestRenderAll();
-  };
-
-  const addTriangle = (canvas?: fabric.Canvas) => {
-    const triangle = new fabric.Triangle({
-      width: 200,
-      height: 280,
-      stroke: strokeColor,
-    });
-    canvas?.add(triangle);
-    canvas?.requestRenderAll();
-  };
-  const addEllipse = (canvas?: fabric.Canvas) => {
-    const ellipse = new fabric.Ellipse({
-      rx: 100,
-      ry: 50,
-      stroke: strokeColor,
-    });
-    canvas?.add(ellipse);
-    canvas?.requestRenderAll();
-  };
-  const addLine = (canvas?: fabric.Canvas) => {
-    const line = new fabric.Line([50, 100, 200, 200], {
-      stroke: strokeColor,
-    });
-    canvas?.add(line);
-    canvas?.requestRenderAll();
-  };
-  const addPolygon = (canvas?: fabric.Canvas) => {
-    const polygon = new fabric.Polygon(
-      [
-        { x: 100, y: 0 },
-        { x: 200, y: 50 },
-        { x: 170, y: 200 },
-        { x: 30, y: 200 },
-        { x: 0, y: 50 },
-      ],
-      {
-        stroke: strokeColor,
-      }
-    );
-    canvas?.add(polygon);
-    canvas?.requestRenderAll();
-  };
-
-  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.set({ fill: event.target.value });
-      canvas?.requestRenderAll();
-      setColor(event.target.value); // Update the color state
-    }
-  };
-
-  const handleStrokeColorChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.set({ stroke: event.target.value });
-      canvas?.requestRenderAll();
-    }
-    setStrokeColor(event.target.value);
-  };
-
-  const handleBrushColorChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.set({ stroke: event.target.value });
-      canvas?.requestRenderAll();
-      setBrushColor(event.target.value); // Update the color state
-    }
-    setBrushColor(event.target.value); // Update the brush color state
-    if (canvas?.isDrawingMode) {
-      canvas.freeDrawingBrush.color = event.target.value; // Update the color of the brush directly
-    }
-  };
-
-  const handleStrokeWidthChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.set({ strokeWidth: parseInt(event.target.value) });
-      canvas?.requestRenderAll();
-    }
-    setStrokeWidth(parseInt(event.target.value));
-  };
-
-  const bringToFront = () => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.bringToFront();
-      canvas?.requestRenderAll();
-    }
-  };
-
-  const sendToBack = () => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.sendToBack();
-      canvas?.requestRenderAll();
-    }
-  };
-
-  const bringForward = () => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.bringForward();
-      canvas?.requestRenderAll();
-    }
-  };
-
-  const sendBackwards = () => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.sendBackwards();
-      canvas?.requestRenderAll();
-    }
-  };
-
-  const addImage = (canvas?: fabric.Canvas, url?: string) => {
-    if (!url) return;
-    fabric.Image.fromURL(url, function (img) {
-      img.scaleToWidth(100);
-      img.scaleToHeight(100);
-      canvas?.add(img);
-      canvas?.requestRenderAll();
-    });
-  };
-
-  const addText = (canvas?: fabric.Canvas) => {
-    const text = new fabric.Textbox("Enter text here", {
-      width: 200,
-      height: 280,
-      stroke: "#2BEBC8",
-    });
-    canvas?.add(text);
-    canvas?.requestRenderAll();
-  };
-
-  const enableDrawing = (canvas?: fabric.Canvas) => {
-    if (canvas) {
-      canvas.isDrawingMode = true;
-      canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-      canvas.freeDrawingBrush.width = brushWidth; // Set the width of the brush
-      canvas.freeDrawingBrush.color = brushColor; // Set the color of the brush
-    }
-  };
-
-  const disableDrawing = (canvas?: fabric.Canvas) => {
-    if (canvas) {
-      canvas.isDrawingMode = false;
-    }
-  };
-
-  const toggleDrawing = (canvas?: fabric.Canvas) => {
-    if (canvas) {
-      canvas.isDrawingMode = !canvas.isDrawingMode;
-      setIsDrawingEnabled(canvas.isDrawingMode);
-      if (canvas.isDrawingMode) {
-        canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-        canvas.freeDrawingBrush.width = brushWidth; // Set the width of the brush
-        canvas.freeDrawingBrush.color = brushColor; // Set the color of the brush
-      }
-    }
-  };
-
-  const addSVG = (canvas?: fabric.Canvas, url?: string) => {
-    if (!url) return;
-    fabric.loadSVGFromURL(url, (objects, options) => {
-      const obj = fabric.util.groupSVGElements(objects, options);
-      obj.scaleToWidth(100);
-      obj.scaleToHeight(100);
-      canvas?.add(obj).renderAll();
-    });
-  };
+const LandingPage = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex">
-      <div className="flex flex-col p-4 space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <button
-            onClick={() => addSVG(canvas, "/assets/browse-svgrepo-com.svg")}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Add My SVG
-          </button>
-          <button
-            onClick={() => addSVG(canvas, "/assets/date-svgrepo-com.svg")}
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
-          >
-            Add Another SVG
-          </button>
-          <select
-            id="strokeWidth"
-            name="strokeWidth"
-            value={strokeWidth}
-            onChange={(event) => handleStrokeWidthChange(event)}
-            className="px-4 py-2 border rounded bg-white text-black h-10"
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            {/* Add more options as needed */}
-          </select>
-          <div>
-            <input
-              type="color"
-              id="strokeColor"
-              name="strokeColor"
-              value={strokeColor}
-              onChange={handleStrokeColorChange}
-            />
-            <label
-              htmlFor="strokeColor"
-              className="block text-sm text-white-700"
-            >
-              Choose stroke color
-            </label>
-          </div>
-          <select
-            className="px-4 py-2 border rounded bg-white text-black h-10"
-            onChange={(event) => setBrushWidth(parseInt(event.target.value))}
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </select>
-          <div>
-            <input
-              type="color"
-              id="brushColor"
-              name="brushColor"
-              value={brushColor}
-              onChange={handleBrushColorChange}
-            />
-            <label
-              htmlFor="brushColor"
-              className="block text-sm text-white-700"
-            >
-              Choose brush color
-            </label>
-          </div>
-          <input
-            type="text"
-            placeholder="Paste image URL here"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-          />
-          <button onClick={() => addText(canvas)}>Add Text</button>
-          <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
-          <button onClick={bringToFront}>Bring to Front</button>
-          <button onClick={sendToBack}>Send to Back</button>
-          <button onClick={bringForward}>Bring Forward</button>
-          <button onClick={sendBackwards}>Send Backwards</button>
-          <button onClick={() => toggleDrawing(canvas)}>
-            {isDrawingEnabled ? "Disable Drawing" : "Enable Drawing"}
-          </button>
-          <select
-            className="px-4 py-2 border rounded bg-white text-black h-10"
-            onChange={(event) => {
-              switch (event.target.value) {
-                case "Rectangle":
-                  addRect(canvas);
-                  break;
-                case "Circle":
-                  addCircle(canvas);
-                  break;
-                case "Triangle":
-                  addTriangle(canvas);
-                  break;
-                case "Ellipse":
-                  addEllipse(canvas);
-                  break;
-                case "Line":
-                  addLine(canvas);
-                  break;
-                case "Polygon":
-                  addPolygon(canvas);
-                  break;
-                default:
-                  break;
-              }
-            }}
-          >
-            <option value="">Select shape</option>
-            <option value="Rectangle">Rectangle</option>
-            <option value="Circle">Circle</option>
-            <option value="Triangle">Triangle</option>
-            <option value="Ellipse">Ellipse</option>
-            <option value="Line">Line</option>
-            <option value="Polygon">Polygon</option>
-          </select>
-          <div>
-            <input
-              type="color"
-              id="colorPicker"
-              name="colorPicker"
-              value={color}
-              onChange={handleColorChange}
-            />
-            <label
-              htmlFor="colorPicker"
-              className="block text-sm text-white-700"
-            >
-              Choose shape color
-            </label>
+    <div className="flex flex-col min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <nav className="bg-white p-4">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="relative flex items-center justify-between h-16">
+            <div className="flex items-center px-2 lg:px-0 xl:w-1/4 xl:px-2">
+              <div className="flex-shrink-0">
+                <img
+                  className="h-8 w-8"
+                  src="https://source.unsplash.com/random"
+                  alt="Logo"
+                />
+              </div>
+              <div className="hidden lg:block lg:w-80">
+                <div className="flex items-baseline">
+                  <a
+                    href="/"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-900 bg-gray-200 hover:bg-gray-300"
+                  >
+                    Home
+                  </a>
+                  <a
+                    href="/canvas"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-900 bg-gray-200 hover:bg-gray-300"
+                  >
+                    Canvas
+                  </a>
+                  {/* Add more navigation links */}
+                </div>
+              </div>
+            </div>
+            <div className="lg:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 rounded-md inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              >
+                <span className="sr-only">Open main menu</span>
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
+            {isOpen && (
+              <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden">
+                <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+                  <div className="px-5 pt-4 flex items-center justify-between">
+                    <div>
+                      <img
+                        className="h-8 w-auto"
+                        src="https://source.unsplash.com/random"
+                        alt="Logo"
+                      />
+                    </div>
+                    <div className="-mr-2">
+                      <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                      >
+                        <span className="sr-only">Close main menu</span>
+                        <svg
+                          className="h-6 w-6"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="px-2 pt-2 pb-3 space-y-1">
+                    <a
+                      href="#"
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                    >
+                      Home
+                    </a>
+                    {/* Add more navigation links */}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-      <div className="flex justify-center items-center flex-grow">
-        <canvas id="canvas" />
-      </div>
+      </nav>
+      <main className="flex-grow">
+        <div className="max-w-md mx-auto w-full space-y-8">
+          <div>
+            <motion.h2
+              className="mt-6 text-center text-3xl font-extrabold text-gray-900"
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              Welcome to our Canvas App
+            </motion.h2>
+            <p className="mt-2 text-center text-sm text-gray-600">
+              Create your own designs with our easy-to-use online platform.
+            </p>
+            <img
+              className="w-full h-64 object-cover mt-6"
+              src="https://source.unsplash.com/random"
+              alt="Random Unsplash"
+            />
+          </div>
+          <div className="mt-8 space-y-6">
+            <motion.button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              Get Started
+            </motion.button>
+          </div>
+        </div>
+      </main>
+      <footer className="bg-white p-4">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <p className="text-center text-gray-500 text-sm">
+            &copy; 2024 Canva Open Source Alternative. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
 
-export default App;
+export default LandingPage;
