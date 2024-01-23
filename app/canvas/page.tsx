@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { fabric } from "fabric";
 import MySvg from "../public/assets/browse-svgrepo-com.svg";
+import { FiLock, FiUnlock } from "react-icons/fi";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -13,6 +14,7 @@ const Canvas = () => {
   const [strokeColor, setStrokeColor] = useState("#000000");
   const [strokeWidth, setStrokeWidth] = useState(1);
   const [isDrawingEnabled, setIsDrawingEnabled] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
 
   useEffect(() => {
     if (canvas?.isDrawingMode) {
@@ -48,6 +50,10 @@ const Canvas = () => {
   }, []);
 
   const addRect = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const rect = new fabric.Rect({
       height: 280,
       width: 200,
@@ -58,6 +64,10 @@ const Canvas = () => {
   };
 
   const addCircle = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const circle = new fabric.Circle({
       radius: 100,
       stroke: strokeColor,
@@ -67,6 +77,10 @@ const Canvas = () => {
   };
 
   const addTriangle = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const triangle = new fabric.Triangle({
       width: 200,
       height: 280,
@@ -76,6 +90,10 @@ const Canvas = () => {
     canvas?.requestRenderAll();
   };
   const addEllipse = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const ellipse = new fabric.Ellipse({
       rx: 100,
       ry: 50,
@@ -85,6 +103,10 @@ const Canvas = () => {
     canvas?.requestRenderAll();
   };
   const addLine = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const line = new fabric.Line([50, 100, 200, 200], {
       stroke: strokeColor,
     });
@@ -92,6 +114,10 @@ const Canvas = () => {
     canvas?.requestRenderAll();
   };
   const addPolygon = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const polygon = new fabric.Polygon(
       [
         { x: 100, y: 0 },
@@ -109,6 +135,10 @@ const Canvas = () => {
   };
 
   const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
       selectedObject.set({ fill: event.target.value });
@@ -120,6 +150,10 @@ const Canvas = () => {
   const handleStrokeColorChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
       selectedObject.set({ stroke: event.target.value });
@@ -131,6 +165,10 @@ const Canvas = () => {
   const handleBrushColorChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
       selectedObject.set({ stroke: event.target.value });
@@ -146,6 +184,10 @@ const Canvas = () => {
   const handleStrokeWidthChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
       selectedObject.set({ strokeWidth: parseInt(event.target.value) });
@@ -155,6 +197,10 @@ const Canvas = () => {
   };
 
   const bringToFront = () => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
       selectedObject.bringToFront();
@@ -163,6 +209,10 @@ const Canvas = () => {
   };
 
   const sendToBack = () => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
       selectedObject.sendToBack();
@@ -171,6 +221,10 @@ const Canvas = () => {
   };
 
   const bringForward = () => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
       selectedObject.bringForward();
@@ -179,6 +233,10 @@ const Canvas = () => {
   };
 
   const sendBackwards = () => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const selectedObject = canvas?.getActiveObject();
     if (selectedObject) {
       selectedObject.sendBackwards();
@@ -187,6 +245,10 @@ const Canvas = () => {
   };
 
   const addImage = (canvas?: fabric.Canvas, url?: string) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     if (!url) return;
     fabric.Image.fromURL(url, function (img) {
       img.scaleToWidth(100);
@@ -197,6 +259,10 @@ const Canvas = () => {
   };
 
   const addText = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     const text = new fabric.Textbox("Enter text here", {
       width: 200,
       height: 280,
@@ -207,6 +273,10 @@ const Canvas = () => {
   };
 
   const enableDrawing = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     if (canvas) {
       canvas.isDrawingMode = true;
       canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
@@ -216,12 +286,20 @@ const Canvas = () => {
   };
 
   const disableDrawing = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     if (canvas) {
       canvas.isDrawingMode = false;
     }
   };
 
   const toggleDrawing = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     if (canvas) {
       canvas.isDrawingMode = !canvas.isDrawingMode;
       setIsDrawingEnabled(canvas.isDrawingMode);
@@ -234,6 +312,10 @@ const Canvas = () => {
   };
 
   const addSVG = (canvas?: fabric.Canvas, url?: string) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
     if (!url) return;
     fabric.loadSVGFromURL(url, (objects, options) => {
       const obj = fabric.util.groupSVGElements(objects, options);
@@ -241,6 +323,17 @@ const Canvas = () => {
       obj.scaleToHeight(100);
       canvas?.add(obj).renderAll();
     });
+  };
+
+  const toggleLock = () => {
+    setIsLocked(!isLocked);
+    if (canvas) {
+      canvas.forEachObject((obj) => {
+        obj.selectable = isLocked;
+        obj.evented = isLocked;
+      });
+      canvas.renderAll();
+    }
   };
 
   return (
@@ -370,6 +463,12 @@ const Canvas = () => {
         </div>
       </div>
       <div className="flex flex-grow justify-center items-center">
+        <button
+          onClick={toggleLock}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        >
+          {isLocked ? <FiLock /> : <FiUnlock />} Toggle Lock
+        </button>
         <canvas id="canvas" className="border border-gray-300"></canvas>
       </div>
     </div>
