@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { fabric } from "fabric";
 import MySvg from "../public/assets/browse-svgrepo-com.svg";
 import { FiLock, FiUnlock } from "react-icons/fi";
+import { CiText } from "react-icons/ci";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -405,8 +406,10 @@ const Canvas = () => {
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
         />
-        <button onClick={() => addText(canvas)}>Add Text</button>
         <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
+        <button onClick={() => addText(canvas)}>
+          <CiText size={64} />
+        </button>
         <button onClick={bringToFront}>Bring to Front</button>
         <button onClick={sendToBack}>Send to Back</button>
         <button onClick={bringForward}>Bring Forward</button>
