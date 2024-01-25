@@ -5,6 +5,7 @@ import { fabric } from "fabric";
 import MySvg from "../public/assets/browse-svgrepo-com.svg";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { CiText } from "react-icons/ci";
+import { MdOutlineDraw } from "react-icons/md";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -410,13 +411,17 @@ const Canvas = () => {
         <button onClick={() => addText(canvas)}>
           <CiText size={64} />
         </button>
+        <button onClick={() => toggleDrawing(canvas)}>
+          {isDrawingEnabled ? (
+            <MdOutlineDraw size={64} />
+          ) : (
+            <MdOutlineDraw size={64} />
+          )}
+        </button>
         <button onClick={bringToFront}>Bring to Front</button>
         <button onClick={sendToBack}>Send to Back</button>
         <button onClick={bringForward}>Bring Forward</button>
         <button onClick={sendBackwards}>Send Backwards</button>
-        <button onClick={() => toggleDrawing(canvas)}>
-          {isDrawingEnabled ? "Disable Drawing" : "Enable Drawing"}
-        </button>
         <select
           className="px-4 py-2 border rounded bg-white text-black h-10"
           onChange={(event) => {
