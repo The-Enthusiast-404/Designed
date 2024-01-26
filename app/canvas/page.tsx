@@ -6,6 +6,7 @@ import MySvg from "../public/assets/browse-svgrepo-com.svg";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { CiText } from "react-icons/ci";
 import { MdOutlineDraw } from "react-icons/md";
+import { FiPalette } from "react-icons/fi";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -17,6 +18,7 @@ const Canvas = () => {
   const [strokeWidth, setStrokeWidth] = useState(1);
   const [isDrawingEnabled, setIsDrawingEnabled] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
+  const [canvasColor, setCanvasColor] = useState("#ffffff");
 
   useEffect(() => {
     if (canvas?.isDrawingMode) {
@@ -34,7 +36,7 @@ const Canvas = () => {
     const c = new fabric.Canvas("canvas", {
       height: 400,
       width: 800,
-      backgroundColor: "white",
+      backgroundColor: canvasColor,
     });
 
     // settings for all canvas in the app
@@ -313,6 +315,21 @@ const Canvas = () => {
     }
   };
 
+  const handleCanvasColorChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    canvas?: fabric.Canvas
+  ) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to modify the canvas color.");
+      return;
+    }
+    if (canvas) {
+      setCanvasColor(event.target.value);
+      canvas.backgroundColor = event.target.value;
+      canvas.renderAll();
+    }
+  };
+
   const addSVG = (canvas?: fabric.Canvas, url?: string) => {
     if (isLocked) {
       alert("The canvas is locked. Unlock it to add new shapes.");
@@ -354,6 +371,13 @@ const Canvas = () => {
         >
           Add Another SVG
         </button>
+        <input
+          type="color"
+          id="canvasColor"
+          name="canvasColor"
+          value={canvasColor}
+          onChange={(event) => handleCanvasColorChange(event, canvas)}
+        />
         <select
           id="strokeWidth"
           name="strokeWidth"
