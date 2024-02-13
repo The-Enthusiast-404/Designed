@@ -25,6 +25,30 @@ const TopBar = ({
       canvas.clear();
     }
   };
+  const downloadAsPNG = () => {
+    if (canvas) {
+      const dataURL = canvas.toDataURL({
+        format: "png",
+        quality: 1,
+      });
+      const link = document.createElement("a");
+      link.download = "canvas.png";
+      link.href = dataURL;
+      link.click();
+    }
+  };
+
+  const downloadAsSVG = () => {
+    if (canvas) {
+      const svg = canvas.toSVG();
+      const blob = new Blob([svg], { type: "image/svg+xml" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.download = "canvas.svg";
+      link.href = url;
+      link.click();
+    }
+  };
   // ...
   return (
     <div className="flex justify-between items-center bg-gray-100 p-4 border-b border-gray-300 w-full">
@@ -75,6 +99,8 @@ const TopBar = ({
       <button onClick={clearCanvas}>
         <MdDeleteOutline size={44} />
       </button>
+      <button onClick={downloadAsPNG}>Download as PNG</button>
+      <button onClick={downloadAsSVG}>Download as SVG</button>
     </div>
   );
 };
