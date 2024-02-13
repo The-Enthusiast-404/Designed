@@ -6,7 +6,6 @@ import MySvg from "../public/assets/browse-svgrepo-com.svg";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { CiText } from "react-icons/ci";
 import { MdOutlineDraw } from "react-icons/md";
-import { FiPalette } from "react-icons/fi";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -358,83 +357,9 @@ const Canvas = () => {
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
-      <div className="flex flex-col bg-gray-100 w-1/4 p-4 border-r border-gray-300">
-        <button
-          onClick={() => addSVG(canvas, "/assets/browse-svgrepo-com.svg")}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-        >
-          Add My SVG
-        </button>
-        <button
-          onClick={() => addSVG(canvas, "/assets/date-svgrepo-com.svg")}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
-        >
-          Add Another SVG
-        </button>
-        <input
-          type="color"
-          id="canvasColor"
-          name="canvasColor"
-          value={canvasColor}
-          onChange={(event) => handleCanvasColorChange(event, canvas)}
-        />
-        <select
-          id="strokeWidth"
-          name="strokeWidth"
-          value={strokeWidth}
-          onChange={(event) => handleStrokeWidthChange(event)}
-          className="px-4 py-2 border rounded bg-white text-black h-10"
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          {/* Add more options as needed */}
-        </select>
-        <div>
-          <input
-            type="color"
-            id="strokeColor"
-            name="strokeColor"
-            value={strokeColor}
-            onChange={handleStrokeColorChange}
-          />
-          <label htmlFor="strokeColor" className="block text-sm text-white-700">
-            Choose stroke color
-          </label>
-        </div>
-        <select
-          className="px-4 py-2 border rounded bg-white text-black h-10"
-          onChange={(event) => setBrushWidth(parseInt(event.target.value))}
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-        </select>
-        <div>
-          <input
-            type="color"
-            id="brushColor"
-            name="brushColor"
-            value={brushColor}
-            onChange={handleBrushColorChange}
-          />
-          <label htmlFor="brushColor" className="block text-sm text-white-700">
-            Choose brush color
-          </label>
-        </div>
-        <input
-          type="text"
-          placeholder="Paste image URL here"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        />
-        <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
-        <button onClick={() => addText(canvas)}>
-          <CiText size={64} />
-        </button>
+      <div className="flex flex-col justify-start gap-10 bg-gray-800 p-4 border-r border-gray-800 text-white">
+        <button className="mb-4 font-bold text-lg">Templates</button>
+        {/* Add your template options here */}
         <button onClick={() => toggleDrawing(canvas)}>
           {isDrawingEnabled ? (
             <MdOutlineDraw size={64} />
@@ -442,65 +367,70 @@ const Canvas = () => {
             <MdOutlineDraw size={64} />
           )}
         </button>
-        <button onClick={bringToFront}>Bring to Front</button>
-        <button onClick={sendToBack}>Send to Back</button>
-        <button onClick={bringForward}>Bring Forward</button>
-        <button onClick={sendBackwards}>Send Backwards</button>
-        <select
-          className="px-4 py-2 border rounded bg-white text-black h-10"
-          onChange={(event) => {
-            switch (event.target.value) {
-              case "Rectangle":
-                addRect(canvas);
-                break;
-              case "Circle":
-                addCircle(canvas);
-                break;
-              case "Triangle":
-                addTriangle(canvas);
-                break;
-              case "Ellipse":
-                addEllipse(canvas);
-                break;
-              case "Line":
-                addLine(canvas);
-                break;
-              case "Polygon":
-                addPolygon(canvas);
-                break;
-              default:
-                break;
-            }
-          }}
-        >
-          <option value="">Select shape</option>
-          <option value="Rectangle">Rectangle</option>
-          <option value="Circle">Circle</option>
-          <option value="Triangle">Triangle</option>
-          <option value="Ellipse">Ellipse</option>
-          <option value="Line">Line</option>
-          <option value="Polygon">Polygon</option>
-        </select>
-        <div>
-          <input
-            type="color"
-            id="colorPicker"
-            name="colorPicker"
-            value={color}
-            onChange={handleColorChange}
-          />
-          <label htmlFor="colorPicker" className="block text-sm text-white-700">
-            Choose shape color
-          </label>
-        </div>
-      </div>
-      <div className="flex flex-grow justify-center items-center">
-        <button
-          onClick={toggleLock}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-        >
-          {isLocked ? <FiLock /> : <FiUnlock />} Toggle Lock
+        <button onClick={() => addText(canvas)}>
+          <CiText size={64} />
         </button>
+        <button className="mb-4 mt-8 font-bold text-lg">Upload Media</button>
+        <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
+      </div>
+
+      {/* Canvas */}
+      <div className="flex flex-col gap-20 flex-grow justify-start items-center">
+        <div className="flex justify-between items-center bg-gray-100 p-4 border-b border-gray-300 w-full">
+          <div>
+            <input
+              type="color"
+              id="brushColor"
+              name="brushColor"
+              value={brushColor}
+              onChange={handleBrushColorChange}
+            />
+            <label
+              htmlFor="brushColor"
+              className="block text-sm text-black-700"
+            >
+              Choose brush color
+            </label>
+          </div>
+          <div>
+            <select
+              className="px-4 py-2 border rounded bg-white text-black h-10"
+              onChange={(event) => setBrushWidth(parseInt(event.target.value))}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
+            <label
+              htmlFor="brushWidth"
+              className="block text-sm text-black-700"
+            >
+              Choose brush size
+            </label>
+          </div>
+          <div>
+            <input
+              type="color"
+              id="canvasColor"
+              name="canvasColor"
+              value={canvasColor}
+              onChange={(event) => handleCanvasColorChange(event, canvas)}
+            />
+            <label
+              htmlFor="canvasColor"
+              className="block text-sm text-black-700"
+            >
+              Choose canvas color
+            </label>
+          </div>
+          <button
+            onClick={toggleLock}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            {isLocked ? <FiLock /> : <FiUnlock />} Toggle Lock
+          </button>
+        </div>
         <canvas id="canvas" className="border border-gray-300"></canvas>
       </div>
     </div>
