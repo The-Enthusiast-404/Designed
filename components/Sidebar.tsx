@@ -11,7 +11,7 @@ const Sidebar = ({
   addImage,
 }: {
   canvas: fabric.Canvas; // specify the type of canvas here
-  toggleDrawing?: () => void;
+  toggleDrawing?: (canvas: fabric.Canvas) => void;
   addText?: (canvas: fabric.Canvas) => void; // specify the type of canvas here
   addImage?: () => void;
 }) => {
@@ -21,7 +21,7 @@ const Sidebar = ({
       <button className="mb-4 font-bold text-lg">
         <GrTemplate size={50} />
       </button>
-      <button onClick={toggleDrawing}>
+      <button onClick={() => toggleDrawing && toggleDrawing(canvas)}>
         <MdOutlineDraw size={64} />
       </button>
       <button onClick={() => addText && addText(canvas)}>
