@@ -13,7 +13,8 @@ const TopBar = ({
   handleBrushColorChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setBrushWidth?: (width: number) => void;
   handleCanvasColorChange?: (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
+    canvas: fabric.Canvas
   ) => void;
   toggleLock?: () => void;
   isLocked?: boolean;
@@ -51,7 +52,9 @@ const TopBar = ({
           type="color"
           id="canvasColor"
           name="canvasColor"
-          onChange={handleCanvasColorChange}
+          onChange={(event) =>
+            handleCanvasColorChange && handleCanvasColorChange(event, canvas)
+          }
         />
         <label htmlFor="canvasColor" className="block text-sm text-black-700">
           Choose canvas color
