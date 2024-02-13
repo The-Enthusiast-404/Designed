@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { fabric } from "fabric";
-import MySvg from "../public/assets/browse-svgrepo-com.svg";
 import { FiLock, FiUnlock } from "react-icons/fi";
-import { CiText } from "react-icons/ci";
-import { MdOutlineDraw } from "react-icons/md";
 import { GrTemplate } from "react-icons/gr";
 import { IoImageSharp } from "react-icons/io5";
 import { RiSketching } from "react-icons/ri";
 import { RxText } from "react-icons/rx";
 import { FaShapes } from "react-icons/fa";
+import CanvasComponent from "@/components/CanvasComponent";
+import Sidebar from "@/components/Sidebar";
+import Topbar from "@/components/Topbar";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -362,87 +362,12 @@ const Canvas = () => {
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
-      <div className="flex flex-col justify-start items-center gap-10 bg-gray-800 p-4 border-r border-gray-800 text-white">
-        <button className="mb-4 font-bold text-lg">
-          <GrTemplate size={50} />
-        </button>
-        {/* Add your template options here */}
-        <button onClick={() => toggleDrawing(canvas)}>
-          {isDrawingEnabled ? (
-            <RiSketching size={64} />
-          ) : (
-            <RiSketching size={64} />
-          )}
-        </button>
-        <button>
-          <FaShapes size={64} />
-        </button>
-        <button onClick={() => addText(canvas)}>
-          <RxText size={64} />
-        </button>
-        <button className="mb-4 mt-8 font-bold text-lg">
-          <IoImageSharp size={64} />
-        </button>
-      </div>
+      <Sidebar />
 
       {/* Canvas */}
       <div className="flex flex-col gap-20 flex-grow justify-start items-center">
-        <div className="flex justify-between items-center bg-gray-100 p-4 border-b border-gray-300 w-full">
-          <div>
-            <input
-              type="color"
-              id="brushColor"
-              name="brushColor"
-              value={brushColor}
-              onChange={handleBrushColorChange}
-            />
-            <label
-              htmlFor="brushColor"
-              className="block text-sm text-black-700"
-            >
-              Choose brush color
-            </label>
-          </div>
-          <div>
-            <select
-              className="px-4 py-2 border rounded bg-white text-black h-10"
-              onChange={(event) => setBrushWidth(parseInt(event.target.value))}
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-            </select>
-            <label
-              htmlFor="brushWidth"
-              className="block text-sm text-black-700"
-            >
-              Choose brush size
-            </label>
-          </div>
-          <div>
-            <input
-              type="color"
-              id="canvasColor"
-              name="canvasColor"
-              value={canvasColor}
-              onChange={(event) => handleCanvasColorChange(event, canvas)}
-            />
-            <label
-              htmlFor="canvasColor"
-              className="block text-sm text-black-700"
-            >
-              Choose canvas color
-            </label>
-          </div>
-          <button
-            onClick={toggleLock}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            {isLocked ? <FiLock /> : <FiUnlock />} Toggle Lock
-          </button>
-        </div>
-        <canvas id="canvas" className="border border-gray-300"></canvas>
+        <Topbar />
+        <CanvasComponent />
       </div>
     </div>
   );
