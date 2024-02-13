@@ -357,6 +357,9 @@ const Canvas = () => {
       });
       canvas.renderAll();
     }
+    if (isDrawingEnabled) {
+      toggleDrawing(canvas);
+    }
   };
 
   return (
