@@ -362,11 +362,27 @@ const Canvas = () => {
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
-      <Sidebar />
+      {canvas && (
+        <Sidebar
+          canvas={canvas}
+          toggleDrawing={toggleDrawing}
+          addImage={addImage}
+          addText={addText}
+        />
+      )}
 
       {/* Canvas */}
       <div className="flex flex-col gap-20 flex-grow justify-start items-center">
-        <Topbar />
+        {
+          <Topbar
+            canvas={canvas}
+            handleBrushColorChange={handleBrushColorChange}
+            handleCanvasColorChange={handleCanvasColorChange}
+            toggleLock={toggleLock}
+            setBrushWidth={setBrushWidth}
+            isLocked={isLocked}
+          />
+        }
         <CanvasComponent />
       </div>
     </div>

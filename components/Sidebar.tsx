@@ -5,12 +5,14 @@ import { CiText } from "react-icons/ci";
 import { IoImageSharp } from "react-icons/io5";
 
 const Sidebar = ({
+  canvas,
   toggleDrawing,
   addText,
   addImage,
 }: {
+  canvas: fabric.Canvas; // specify the type of canvas here
   toggleDrawing?: () => void;
-  addText?: () => void;
+  addText?: (canvas: fabric.Canvas) => void; // specify the type of canvas here
   addImage?: () => void;
 }) => {
   // ...
@@ -22,7 +24,7 @@ const Sidebar = ({
       <button onClick={toggleDrawing}>
         <MdOutlineDraw size={64} />
       </button>
-      <button onClick={addText}>
+      <button onClick={() => addText && addText(canvas)}>
         <CiText size={64} />
       </button>
       <button className="mb-4 mt-8 font-bold text-lg">

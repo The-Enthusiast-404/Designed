@@ -2,12 +2,14 @@ import React from "react";
 import { FiLock, FiUnlock } from "react-icons/fi";
 
 const TopBar = ({
+  canvas,
   handleBrushColorChange,
   setBrushWidth,
   handleCanvasColorChange,
   toggleLock,
   isLocked,
 }: {
+  canvas: fabric.Canvas; // specify the type of canvas here
   handleBrushColorChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setBrushWidth?: (width: number) => void;
   handleCanvasColorChange?: (
