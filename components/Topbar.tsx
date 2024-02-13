@@ -1,5 +1,6 @@
 import React from "react";
 import { FiLock, FiUnlock } from "react-icons/fi";
+import { MdDeleteOutline } from "react-icons/md";
 
 const TopBar = ({
   canvas,
@@ -19,6 +20,11 @@ const TopBar = ({
   toggleLock?: () => void;
   isLocked?: boolean;
 }) => {
+  const clearCanvas = () => {
+    if (canvas) {
+      canvas.clear();
+    }
+  };
   // ...
   return (
     <div className="flex justify-between items-center bg-gray-100 p-4 border-b border-gray-300 w-full">
@@ -65,6 +71,9 @@ const TopBar = ({
         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
       >
         {isLocked ? <FiLock /> : <FiUnlock />} Toggle Lock
+      </button>
+      <button onClick={clearCanvas}>
+        <MdDeleteOutline size={44} />
       </button>
     </div>
   );
