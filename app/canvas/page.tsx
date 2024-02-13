@@ -6,6 +6,11 @@ import MySvg from "../public/assets/browse-svgrepo-com.svg";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { CiText } from "react-icons/ci";
 import { MdOutlineDraw } from "react-icons/md";
+import { GrTemplate } from "react-icons/gr";
+import { IoImageSharp } from "react-icons/io5";
+import { RiSketching } from "react-icons/ri";
+import { RxText } from "react-icons/rx";
+import { FaShapes } from "react-icons/fa";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -357,21 +362,27 @@ const Canvas = () => {
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
-      <div className="flex flex-col justify-start gap-10 bg-gray-800 p-4 border-r border-gray-800 text-white">
-        <button className="mb-4 font-bold text-lg">Templates</button>
+      <div className="flex flex-col justify-start items-center gap-10 bg-gray-800 p-4 border-r border-gray-800 text-white">
+        <button className="mb-4 font-bold text-lg">
+          <GrTemplate size={50} />
+        </button>
         {/* Add your template options here */}
         <button onClick={() => toggleDrawing(canvas)}>
           {isDrawingEnabled ? (
-            <MdOutlineDraw size={64} />
+            <RiSketching size={64} />
           ) : (
-            <MdOutlineDraw size={64} />
+            <RiSketching size={64} />
           )}
         </button>
-        <button onClick={() => addText(canvas)}>
-          <CiText size={64} />
+        <button>
+          <FaShapes size={64} />
         </button>
-        <button className="mb-4 mt-8 font-bold text-lg">Upload Media</button>
-        <button onClick={() => addImage(canvas, imageUrl)}>Add Image</button>
+        <button onClick={() => addText(canvas)}>
+          <RxText size={64} />
+        </button>
+        <button className="mb-4 mt-8 font-bold text-lg">
+          <IoImageSharp size={64} />
+        </button>
       </div>
 
       {/* Canvas */}
