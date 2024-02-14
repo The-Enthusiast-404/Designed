@@ -372,24 +372,6 @@ const Canvas = () => {
     }
   };
 
-  const addToCanvas = (imageSrc) => {
-    if (isLocked) {
-      alert("The canvas is locked. Unlock it to add new shapes.");
-      return;
-    }
-    if (!canvas) return;
-
-    let imgElement = new Image();
-    imgElement.src = imageSrc;
-    imgElement.onload = function () {
-      let imgInstance = new fabric.Image(imgElement, {
-        scaleX: 0.5,
-        scaleY: 0.5,
-      });
-      canvas.add(imgInstance);
-    };
-  };
-
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
@@ -399,6 +381,7 @@ const Canvas = () => {
           toggleDrawing={toggleDrawing}
           addImage={addImage}
           addText={addText}
+          isLocked={isLocked}
         />
       )}
 
@@ -416,46 +399,6 @@ const Canvas = () => {
         }
         <CanvasComponent />
       </div>
-      <Drawer>
-        <DrawerTrigger>Open</DrawerTrigger>
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-            <DrawerDescription>This action cannot be undone.</DrawerDescription>
-          </DrawerHeader>
-
-          {/* Scrollable list of images */}
-          <div
-            style={{
-              display: "flex", // Use Flexbox
-              flexWrap: "wrap", // Allow the items to wrap to the next line
-              overflowY: "scroll", // Make the content scrollable
-              maxHeight: "200px", // Set a max height
-            }}
-          >
-            {images.map((image, index) => (
-              <img
-                key={index}
-                src={image.src}
-                alt={`Image ${index}`}
-                onClick={() => addToCanvas(image.src)} // Make sure the click event handler is set up correctly
-                style={{
-                  width: "calc(33.33% - 10px)", // Set the width of the images to fill 1/3 of the container, minus a small margin
-                  margin: "5px", // Add a small margin around the images
-                  cursor: "pointer", // Change the cursor to a pointer when hovering over the images
-                }}
-              />
-            ))}
-          </div>
-
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
     </div>
   );
 };
