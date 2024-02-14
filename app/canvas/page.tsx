@@ -303,16 +303,6 @@ const Canvas = () => {
     }
   };
 
-  const disableDrawing = (canvas?: fabric.Canvas) => {
-    if (isLocked) {
-      alert("The canvas is locked. Unlock it to add new shapes.");
-      return;
-    }
-    if (canvas) {
-      canvas.isDrawingMode = false;
-    }
-  };
-
   const toggleDrawing = (canvas?: fabric.Canvas) => {
     if (isLocked) {
       alert("The canvas is locked. Unlock it to add new shapes.");
@@ -344,20 +334,6 @@ const Canvas = () => {
     }
   };
 
-  const addSVG = (canvas?: fabric.Canvas, url?: string) => {
-    if (isLocked) {
-      alert("The canvas is locked. Unlock it to add new shapes.");
-      return;
-    }
-    if (!url) return;
-    fabric.loadSVGFromURL(url, (objects, options) => {
-      const obj = fabric.util.groupSVGElements(objects, options);
-      obj.scaleToWidth(100);
-      obj.scaleToHeight(100);
-      canvas?.add(obj).renderAll();
-    });
-  };
-
   const toggleLock = () => {
     setIsLocked(!isLocked);
     if (canvas) {
@@ -370,6 +346,44 @@ const Canvas = () => {
     if (isDrawingEnabled) {
       toggleDrawing(canvas);
     }
+  };
+
+  const groupObjects = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to group objects.");
+      return;
+    }
+    if (!canvas) return;
+    if (!canvas.getActiveObject()) {
+      alert("Please select some objects to group.");
+      return;
+    }
+    if (canvas.getActiveObject().type !== "activeSelection") {
+      alert("Please select more than one object to group.");
+      return;
+    }
+    let activeSelection = canvas.getActiveObject() as fabric.ActiveSelection;
+    let group = activeSelection.toGroup();
+    canvas.requestRenderAll();
+  };
+
+  const ungroupObjects = (canvas?: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to ungroup objects.");
+      return;
+    }
+    if (!canvas) return;
+    if (!canvas.getActiveObject()) {
+      alert("Please select a group to ungroup.");
+      return;
+    }
+    if (canvas.getActiveObject().type !== "group") {
+      alert("Please select a group to ungroup.");
+      return;
+    }
+    let group = canvas.getActiveObject() as fabric.Group;
+    group.toActiveSelection();
+    canvas.requestRenderAll();
   };
 
   return (
@@ -399,6 +413,8 @@ const Canvas = () => {
         }
         <CanvasComponent />
       </div>
+      <Button onClick={() => groupObjects(canvas)}>Group</Button>
+      <Button onClick={() => ungroupObjects(canvas)}>Ungroup</Button>
     </div>
   );
 };
