@@ -2,15 +2,23 @@
 
 import React, { useState, useEffect } from "react";
 import { fabric } from "fabric";
-import { FiLock, FiUnlock } from "react-icons/fi";
-import { GrTemplate } from "react-icons/gr";
-import { IoImageSharp } from "react-icons/io5";
-import { RiSketching } from "react-icons/ri";
-import { RxText } from "react-icons/rx";
-import { FaShapes } from "react-icons/fa";
 import CanvasComponent from "@/components/CanvasComponent";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import image1 from "@/images/carbon(6).png";
+import image2 from "@/images/carbon(7).png";
+import image3 from "@/images/carbon(8).png";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -23,6 +31,8 @@ const Canvas = () => {
   const [isDrawingEnabled, setIsDrawingEnabled] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [canvasColor, setCanvasColor] = useState("#ffffff");
+  const images = [image1, image2 /*, the rest of your images... */];
+  console.log(images);
 
   useEffect(() => {
     if (canvas?.isDrawingMode) {
@@ -362,6 +372,24 @@ const Canvas = () => {
     }
   };
 
+  const addToCanvas = (imageSrc) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
+    if (!canvas) return;
+
+    let imgElement = new Image();
+    imgElement.src = imageSrc;
+    imgElement.onload = function () {
+      let imgInstance = new fabric.Image(imgElement, {
+        scaleX: 0.5,
+        scaleY: 0.5,
+      });
+      canvas.add(imgInstance);
+    };
+  };
+
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
@@ -388,6 +416,46 @@ const Canvas = () => {
         }
         <CanvasComponent />
       </div>
+      <Drawer>
+        <DrawerTrigger>Open</DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+            <DrawerDescription>This action cannot be undone.</DrawerDescription>
+          </DrawerHeader>
+
+          {/* Scrollable list of images */}
+          <div
+            style={{
+              display: "flex", // Use Flexbox
+              flexWrap: "wrap", // Allow the items to wrap to the next line
+              overflowY: "scroll", // Make the content scrollable
+              maxHeight: "200px", // Set a max height
+            }}
+          >
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={image.src}
+                alt={`Image ${index}`}
+                onClick={() => addToCanvas(image.src)} // Make sure the click event handler is set up correctly
+                style={{
+                  width: "calc(33.33% - 10px)", // Set the width of the images to fill 1/3 of the container, minus a small margin
+                  margin: "5px", // Add a small margin around the images
+                  cursor: "pointer", // Change the cursor to a pointer when hovering over the images
+                }}
+              />
+            ))}
+          </div>
+
+          <DrawerFooter>
+            <Button>Submit</Button>
+            <DrawerClose>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 };
