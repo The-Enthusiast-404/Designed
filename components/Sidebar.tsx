@@ -4,6 +4,7 @@ import { MdOutlineDraw } from "react-icons/md";
 import { CiText } from "react-icons/ci";
 import { IoImageSharp } from "react-icons/io5";
 import { fabric } from "fabric";
+import { LuShapes } from "react-icons/lu";
 import {
   Drawer,
   DrawerClose,
@@ -18,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import image1 from "@/images/carbon(6).png";
 import image2 from "@/images/carbon(7).png";
 import image3 from "@/images/carbon(8).png";
+import { FaRegSquare, FaRegCircle } from "react-icons/fa";
 
 const Sidebar = ({
   canvas,
@@ -34,6 +36,53 @@ const Sidebar = ({
 }) => {
   // ...
   const images = [image1, image2 /*, the rest of your images... */];
+  const shapes = [
+    { type: "rectangle", icon: FaRegSquare },
+    { type: "circle", icon: FaRegCircle },
+    // Add objects for other shapes...
+  ];
+
+  const addShapeToCanvas = (shape: string) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
+    if (!canvas) return;
+
+    let shapeInstance;
+    switch (shape) {
+      case "rectangle":
+        if (isLocked) {
+          alert("The canvas is locked. Unlock it to add new shapes.");
+          return;
+        }
+        const rect = new fabric.Rect({
+          height: 280,
+          width: 200,
+          stroke: "#000000",
+        });
+        canvas?.add(rect);
+        canvas?.requestRenderAll();
+        break;
+      case "circle":
+        if (isLocked) {
+          alert("The canvas is locked. Unlock it to add new shapes.");
+          return;
+        }
+        const circle = new fabric.Circle({
+          radius: 100,
+          stroke: "#000000",
+        });
+        canvas?.add(circle);
+        canvas?.requestRenderAll();
+        break;
+      // Add cases for other shapes...
+    }
+
+    if (shapeInstance) {
+      canvas.add(shapeInstance);
+    }
+  };
 
   const addToCanvas = (imageSrc, canvas: fabric.Canvas) => {
     if (isLocked) {
@@ -64,6 +113,44 @@ const Sidebar = ({
       <button onClick={() => addText && addText(canvas)}>
         <CiText size={64} />
       </button>
+      <Drawer>
+        <DrawerTrigger>
+          <LuShapes size={64} />
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Select a Shape</DrawerTitle>
+            <DrawerDescription>
+              choose shape to add it to the canvas
+            </DrawerDescription>
+          </DrawerHeader>
+
+          <div
+            style={{
+              display: "flex", // Use Flexbox
+              flexWrap: "wrap", // Allow the items to wrap to the next line
+              justifyContent: "start", // Distribute items evenly
+            }}
+          >
+            {shapes.map((shape, index) => {
+              const Icon = shape.icon;
+              return (
+                <div
+                  key={index}
+                  onClick={() => addShapeToCanvas(shape.type)}
+                  style={{
+                    margin: "5px", // Add a small margin around the items
+                    display: "flex", // Use Flexbox
+                    justifyContent: "start", // Center the items
+                  }}
+                >
+                  <Icon size={100} /> {/* Increase the size of the icons */}
+                </div>
+              );
+            })}
+          </div>
+        </DrawerContent>
+      </Drawer>
       <Drawer>
         <DrawerTrigger>
           <IoImageSharp size={64} />
