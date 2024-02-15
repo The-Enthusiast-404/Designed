@@ -38,6 +38,38 @@ const TopBar = ({
     }
   };
 
+  const bringToFront = () => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.bringToFront();
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const sendToBack = () => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.sendToBack();
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const bringForward = () => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.bringForward();
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const sendBackwards = () => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject) {
+      selectedObject.sendBackwards();
+      canvas?.requestRenderAll();
+    }
+  };
+
   const downloadAsSVG = () => {
     if (canvas) {
       const svg = canvas.toSVG();
@@ -101,6 +133,13 @@ const TopBar = ({
       </button>
       <button onClick={downloadAsPNG}>Download as PNG</button>
       <button onClick={downloadAsSVG}>Download as SVG</button>
+      <button onClick={bringToFront}>Bring to Front</button>
+
+      <button onClick={sendToBack}>Send to Back</button>
+
+      <button onClick={bringForward}>Bring Forward</button>
+
+      <button onClick={sendBackwards}>Send Backwards</button>
     </div>
   );
 };
