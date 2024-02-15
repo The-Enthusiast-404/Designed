@@ -19,7 +19,23 @@ import { Button } from "@/components/ui/button";
 import image1 from "@/images/carbon(6).png";
 import image2 from "@/images/carbon(7).png";
 import image3 from "@/images/carbon(8).png";
-import { FaRegSquare, FaRegCircle } from "react-icons/fa";
+
+import {
+  FaRegSquare,
+  FaRegCircle,
+  FaRegHeart,
+  FaRegArrowAltCircleRight,
+  FaRegArrowAltCircleLeft,
+  FaRegArrowAltCircleUp,
+  FaRegArrowAltCircleDown,
+  FaRegDotCircle,
+  FaRegTimesCircle,
+  FaRegCheckCircle,
+  FaPlusCircle,
+  FaMinusCircle,
+} from "react-icons/fa";
+
+import { IoTriangle } from "react-icons/io5";
 
 const Sidebar = ({
   canvas,
@@ -36,11 +52,25 @@ const Sidebar = ({
 }) => {
   // ...
   const images = [image1, image2 /*, the rest of your images... */];
+
   const shapes = [
     { type: "rectangle", icon: FaRegSquare },
     { type: "circle", icon: FaRegCircle },
+    { type: "triangle", icon: IoTriangle },
+    { type: "ellipse", icon: FaRegHeart },
+    { type: "arrowRight", icon: FaRegArrowAltCircleRight },
+    { type: "arrowLeft", icon: FaRegArrowAltCircleLeft },
+    { type: "arrowUp", icon: FaRegArrowAltCircleUp },
+    { type: "arrowDown", icon: FaRegArrowAltCircleDown },
+    { type: "dot", icon: FaRegDotCircle },
+    { type: "cross", icon: FaRegTimesCircle },
+    { type: "check", icon: FaRegCheckCircle },
+    { type: "plus", icon: FaPlusCircle },
+    { type: "minus", icon: FaMinusCircle },
+
     // Add objects for other shapes...
   ];
+  // Add objects for other shapes...
 
   const addShapeToCanvas = (shape: string) => {
     if (isLocked) {
@@ -52,29 +82,111 @@ const Sidebar = ({
     let shapeInstance;
     switch (shape) {
       case "rectangle":
-        if (isLocked) {
-          alert("The canvas is locked. Unlock it to add new shapes.");
-          return;
-        }
-        const rect = new fabric.Rect({
-          height: 280,
-          width: 200,
-          stroke: "#000000",
+        shapeInstance = new fabric.Rect({
+          width: 60,
+          height: 70,
+          fill: "#D81B60",
+          left: 10,
+          top: 10,
         });
-        canvas?.add(rect);
-        canvas?.requestRenderAll();
         break;
       case "circle":
-        if (isLocked) {
-          alert("The canvas is locked. Unlock it to add new shapes.");
-          return;
-        }
-        const circle = new fabric.Circle({
-          radius: 100,
-          stroke: "#000000",
+        shapeInstance = new fabric.Circle({
+          radius: 30,
+          fill: "#1E88E5",
+          left: 10,
+          top: 10,
         });
-        canvas?.add(circle);
-        canvas?.requestRenderAll();
+        break;
+      case "triangle":
+        shapeInstance = new fabric.Triangle({
+          width: 60,
+          height: 70,
+          fill: "#43A047",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "ellipse":
+        shapeInstance = new fabric.Ellipse({
+          rx: 45,
+          ry: 25,
+          fill: "#FDD835",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "arrowRight":
+        shapeInstance = new fabric.Path("M 0 0 L 50 50 L 0 100 z", {
+          fill: "#3949AB",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "arrowLeft":
+        shapeInstance = new fabric.Path("M 50 0 L 0 50 L 50 100 z", {
+          fill: "#3949AB",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "arrowUp":
+        shapeInstance = new fabric.Path("M 0 50 L 50 0 L 100 50 z", {
+          fill: "#3949AB",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "arrowDown":
+        shapeInstance = new fabric.Path("M 0 0 L 50 50 L 100 0 z", {
+          fill: "#3949AB",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "dot":
+        shapeInstance = new fabric.Circle({
+          radius: 5,
+          fill: "#6D4C41",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "cross":
+        shapeInstance = new fabric.Path("M 0 0 L 100 100 M 100 0 L 0 100", {
+          stroke: "#F4511E",
+          strokeWidth: 5,
+          fill: "",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "check":
+        shapeInstance = new fabric.Path("M 0 50 L 50 100 L 100 0", {
+          stroke: "#F4511E",
+          strokeWidth: 5,
+          fill: "",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "plus":
+        shapeInstance = new fabric.Path("M 50 0 L 50 100 M 0 50 L 100 50", {
+          stroke: "#F4511E",
+          strokeWidth: 5,
+          fill: "",
+          left: 10,
+          top: 10,
+        });
+        break;
+      case "minus":
+        shapeInstance = new fabric.Path("M 0 50 L 100 50", {
+          stroke: "#F4511E",
+          strokeWidth: 5,
+          fill: "",
+          left: 10,
+          top: 10,
+        });
         break;
       // Add cases for other shapes...
     }
