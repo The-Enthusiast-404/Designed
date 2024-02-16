@@ -16,9 +16,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import image1 from "@/images/carbon(6).png";
-import image2 from "@/images/carbon(7).png";
-import image3 from "@/images/carbon(8).png";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -31,8 +28,10 @@ const Canvas = () => {
   const [isDrawingEnabled, setIsDrawingEnabled] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [canvasColor, setCanvasColor] = useState("#ffffff");
-  const images = [image1, image2 /*, the rest of your images... */];
-  console.log(images);
+  const images = [
+    /*, the rest of your images... */
+  ];
+  // console.log(images);
 
   useEffect(() => {
     if (canvas?.isDrawingMode) {

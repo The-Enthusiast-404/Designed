@@ -5,6 +5,9 @@ import { CiText } from "react-icons/ci";
 import { IoImageSharp } from "react-icons/io5";
 import { fabric } from "fabric";
 import { LuShapes } from "react-icons/lu";
+import TechIcon1 from "@/public/images/tech-icons/tech_icon_1.svg";
+import TechIcon2 from "@/public/images/tech-icons/tech_icon_2.svg";
+import TechIcon3 from "@/public/images/tech-icons/tech_icon_3.svg";
 import {
   Drawer,
   DrawerClose,
@@ -16,9 +19,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import image1 from "@/images/carbon(6).png";
-import image2 from "@/images/carbon(7).png";
-import image3 from "@/images/carbon(8).png";
 
 import {
   FaRegSquare,
@@ -51,7 +51,12 @@ const Sidebar = ({
   isLocked?: boolean;
 }) => {
   // ...
-  const images = [image1, image2 /*, the rest of your images... */];
+  const images = [
+    TechIcon1,
+    TechIcon2,
+    TechIcon3,
+    /*, the rest of your images... */
+  ];
 
   const shapes = [
     { type: "rectangle", icon: FaRegSquare },
@@ -289,7 +294,7 @@ const Sidebar = ({
                 alt={`Image ${index}`}
                 onClick={() => addToCanvas(image.src, canvas)} // Make sure the click event handler is set up correctly
                 style={{
-                  width: "calc(33.33% - 10px)", // Set the width of the images to fill 1/3 of the container, minus a small margin
+                  width: "5%", // Set the width of the images to fill 1/3 of the container, minus a small margin
                   margin: "5px", // Add a small margin around the images
                   cursor: "pointer", // Change the cursor to a pointer when hovering over the images
                 }}
