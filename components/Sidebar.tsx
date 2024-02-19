@@ -219,6 +219,19 @@ const Sidebar = ({
     };
   };
 
+  const addSVGToCanvas = (imageSrc: string, canvas: fabric.Canvas) => {
+    if (isLocked) {
+      alert("The canvas is locked. Unlock it to add new shapes.");
+      return;
+    }
+    if (!canvas) return;
+
+    fabric.loadSVGFromURL(imageSrc, function (objects, options) {
+      var img = fabric.util.groupSVGElements(objects, options);
+      canvas.add(img).renderAll();
+    });
+  };
+
   return (
     <div className="flex flex-col justify-start items-center gap-10 bg-gray-800 p-4 border-r border-gray-800 text-white">
       <button className="mb-4 font-bold text-lg">
@@ -292,7 +305,7 @@ const Sidebar = ({
                 key={index}
                 src={image.src}
                 alt={`Image ${index}`}
-                onClick={() => addToCanvas(image.src, canvas)} // Make sure the click event handler is set up correctly
+                onClick={() => addSVGToCanvas(image.src, canvas)} // Make sure the click event handler is set up correctly
                 style={{
                   width: "5%", // Set the width of the images to fill 1/3 of the container, minus a small margin
                   margin: "5px", // Add a small margin around the images
