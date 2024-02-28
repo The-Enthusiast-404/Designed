@@ -66,6 +66,57 @@ const Canvas = () => {
     };
   }, []);
 
+  const gridSize = 20;
+
+  useEffect(() => {
+    if (canvas) {
+      canvas.on("object:moving", function (options) {
+        // Snap to grid
+        options.target.set({
+          left: Math.round(options.target.left / gridSize) * gridSize,
+          top: Math.round(options.target.top / gridSize) * gridSize,
+        });
+
+        // Remove existing guide lines
+        canvas.getObjects("line").forEach(function (line) {
+          canvas.remove(line);
+        });
+
+        // Calculate object positions
+        const movingObjPos = options.target.getCenterPoint();
+
+        // Calculate distances from the center of the canvas
+        const distanceX = Math.abs(movingObjPos.x - canvas.width / 2);
+        const distanceY = Math.abs(movingObjPos.y - canvas.height / 2);
+
+        // Check if the moving object is close to the center of the canvas
+        if (distanceX <= gridSize && distanceY <= gridSize) {
+          // Add vertical guide line
+          let line = new fabric.Line(
+            [canvas.width / 2, 0, canvas.width / 2, canvas.height],
+            {
+              stroke: "#000",
+              selectable: false,
+              type: "line",
+            }
+          );
+          canvas.add(line);
+
+          // Add horizontal guide line
+          line = new fabric.Line(
+            [0, canvas.height / 2, canvas.width, canvas.height / 2],
+            {
+              stroke: "#000",
+              selectable: false,
+              type: "line",
+            }
+          );
+          canvas.add(line);
+        }
+      });
+    }
+  }, [canvas]);
+
   const addRect = (canvas?: fabric.Canvas) => {
     if (isLocked) {
       alert("The canvas is locked. Unlock it to add new shapes.");
