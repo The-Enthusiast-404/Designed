@@ -1,6 +1,6 @@
 "use client"; // next.js app router
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { fabric } from "fabric";
 import CanvasComponent from "@/components/CanvasComponent";
 import Sidebar from "@/components/Sidebar";
@@ -28,6 +28,7 @@ const Canvas = () => {
   const [isDrawingEnabled, setIsDrawingEnabled] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [canvasColor, setCanvasColor] = useState("#ffffff");
+  const canvasRef = useRef(null);
   const images = [
     /*, the rest of your images... */
   ];
@@ -46,7 +47,7 @@ const Canvas = () => {
   }, [brushColor]);
 
   useEffect(() => {
-    const c = new fabric.Canvas("canvas", {
+    const canvas = new fabric.Canvas("canvas", {
       height: 400,
       width: 800,
       backgroundColor: canvasColor,
@@ -59,63 +60,129 @@ const Canvas = () => {
     fabric.Object.prototype.cornerStrokeColor = "#2BEBC8";
     fabric.Object.prototype.cornerSize = 6;
 
-    setCanvas(c);
+    setCanvas(canvas);
 
-    return () => {
-      c.dispose();
-    };
-  }, []);
+    const guidelines = [];
 
-  const gridSize = 20;
+    canvas.on("object:moving", function (e) {
+      let activeObject = e.target;
 
-  useEffect(() => {
-    if (canvas) {
-      canvas.on("object:moving", function (options) {
-        // Snap to grid
-        options.target.set({
-          left: Math.round(options.target.left / gridSize) * gridSize,
-          top: Math.round(options.target.top / gridSize) * gridSize,
-        });
+      // Remove existing guidelines
+      guidelines.forEach((guideline) => canvas.remove(guideline));
+      guidelines.length = 0;
 
-        // Remove existing guide lines
-        canvas.getObjects("line").forEach(function (line) {
-          canvas.remove(line);
-        });
+      // Check against all objects on the canvas
+      canvas.getObjects().forEach(function (object) {
+        if (object === activeObject || object.type === "line") return;
 
         // Calculate object positions
-        const movingObjPos = options.target.getCenterPoint();
+        let activeObjectPos = activeObject.getCenterPoint();
+        let objectPos = object.getCenterPoint();
 
-        // Calculate distances from the center of the canvas
-        const distanceX = Math.abs(movingObjPos.x - canvas.width / 2);
-        const distanceY = Math.abs(movingObjPos.y - canvas.height / 2);
+        // Calculate distances to the edges and center of the other object
+        let distanceToLeftEdge = Math.abs(activeObjectPos.x - object.left);
+        let distanceToRightEdge = Math.abs(
+          activeObjectPos.x - (object.left + object.width)
+        );
+        let distanceToTopEdge = Math.abs(activeObjectPos.y - object.top);
+        let distanceToBottomEdge = Math.abs(
+          activeObjectPos.y - (object.top + object.height)
+        );
+        let distanceToCenterX = Math.abs(activeObjectPos.x - objectPos.x);
+        let distanceToCenterY = Math.abs(activeObjectPos.y - objectPos.y);
 
-        // Check if the moving object is close to the center of the canvas
-        if (distanceX <= gridSize && distanceY <= gridSize) {
-          // Add vertical guide line
-          let line = new fabric.Line(
-            [canvas.width / 2, 0, canvas.width / 2, canvas.height],
-            {
-              stroke: "#000",
-              selectable: false,
-              type: "line",
-            }
-          );
-          canvas.add(line);
-
-          // Add horizontal guide line
-          line = new fabric.Line(
-            [0, canvas.height / 2, canvas.width, canvas.height / 2],
-            {
-              stroke: "#000",
-              selectable: false,
-              type: "line",
-            }
-          );
-          canvas.add(line);
+        // Snap to the edges and center of the other object
+        if (distanceToLeftEdge < 10) {
+          activeObject
+            .set({ left: object.left - activeObject.width / 2 })
+            .setCoords();
+          addGuideline(object.left, null);
+        }
+        if (distanceToRightEdge < 10) {
+          activeObject
+            .set({ left: object.left + object.width - activeObject.width / 2 })
+            .setCoords();
+          addGuideline(object.left + object.width, null);
+        }
+        if (distanceToTopEdge < 10) {
+          activeObject
+            .set({ top: object.top - activeObject.height / 2 })
+            .setCoords();
+          addGuideline(null, object.top);
+        }
+        if (distanceToBottomEdge < 10) {
+          activeObject
+            .set({ top: object.top + object.height - activeObject.height / 2 })
+            .setCoords();
+          addGuideline(null, object.top + object.height);
+        }
+        if (distanceToCenterX < 10) {
+          activeObject
+            .set({ left: objectPos.x - activeObject.width / 2 })
+            .setCoords();
+          addGuideline(objectPos.x, null);
+        }
+        if (distanceToCenterY < 10) {
+          activeObject
+            .set({ top: objectPos.y - activeObject.height / 2 })
+            .setCoords();
+          addGuideline(null, objectPos.y);
         }
       });
+
+      // Check if the moving object is close to the edges of the canvas
+      if (Math.abs(activeObject.left) < 10) {
+        activeObject.set({ left: 0 }).setCoords();
+        addGuideline(0, null);
+      }
+      if (Math.abs(activeObject.top) < 10) {
+        activeObject.set({ top: 0 }).setCoords();
+        addGuideline(null, 0);
+      }
+      if (
+        Math.abs(activeObject.left + activeObject.width - canvas.width) < 10
+      ) {
+        activeObject
+          .set({ left: canvas.width - activeObject.width })
+          .setCoords();
+        addGuideline(canvas.width, null);
+      }
+      if (
+        Math.abs(activeObject.top + activeObject.height - canvas.height) < 10
+      ) {
+        activeObject
+          .set({ top: canvas.height - activeObject.height })
+          .setCoords();
+        addGuideline(null, canvas.height);
+      }
+    });
+
+    function addGuideline(x, y) {
+      if (x !== null) {
+        let line = new fabric.Line([x, 0, x, canvas.height], {
+          stroke: "#00f",
+          selectable: false,
+          evented: false,
+        });
+        guidelines.push(line);
+        canvas.add(line);
+      }
+
+      if (y !== null) {
+        let line = new fabric.Line([0, y, canvas.width, y], {
+          stroke: "#00f",
+          selectable: false,
+          evented: false,
+        });
+        guidelines.push(line);
+        canvas.add(line);
+      }
     }
-  }, [canvas]);
+
+    return () => {
+      canvas.dispose();
+    };
+  }, []);
 
   const addRect = (canvas?: fabric.Canvas) => {
     if (isLocked) {
