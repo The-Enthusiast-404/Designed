@@ -140,18 +140,22 @@ const Canvas = () => {
         addGuideline(null, 0);
       }
       if (
-        Math.abs(activeObject.left + activeObject.width - canvas.width) < 10
+        Math.abs(
+          activeObject.left + activeObject.getScaledWidth() - canvas.width
+        ) < 10
       ) {
         activeObject
-          .set({ left: canvas.width - activeObject.width })
+          .set({ left: canvas.width - activeObject.getScaledWidth() })
           .setCoords();
         addGuideline(canvas.width, null);
       }
       if (
-        Math.abs(activeObject.top + activeObject.height - canvas.height) < 10
+        Math.abs(
+          activeObject.top + activeObject.getScaledHeight() - canvas.height
+        ) < 10
       ) {
         activeObject
-          .set({ top: canvas.height - activeObject.height })
+          .set({ top: canvas.height - activeObject.getScaledHeight() })
           .setCoords();
         addGuideline(null, canvas.height);
       }
