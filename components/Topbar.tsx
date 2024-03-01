@@ -103,6 +103,27 @@ const TopBar = ({
     }
   }
 
+  let copiedObject = null;
+
+  function handleCopy() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+      copiedObject = fabric.util.object.clone(activeObject);
+    }
+  }
+
+  function handlePaste() {
+    if (copiedObject) {
+      copiedObject.clone((cloned) => {
+        canvas.add(cloned);
+        cloned
+          .set({ left: cloned.left + 10, top: cloned.top + 10 })
+          .setCoords();
+        canvas.renderAll();
+      });
+    }
+  }
+
   return (
     <div className="flex justify-between items-center bg-gray-100 p-4 border-b border-gray-300 w-full">
       <div>
@@ -163,6 +184,8 @@ const TopBar = ({
       <button onClick={sendBackwards}>Send Backwards</button>
       <button onClick={handleDelete}>Delete</button>
       <button onClick={handleClone}>Clone</button>
+      <button onClick={handleCopy}>Copy</button>
+      <button onClick={handlePaste}>Paste</button>
     </div>
   );
 };
