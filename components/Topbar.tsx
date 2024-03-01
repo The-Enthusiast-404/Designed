@@ -81,7 +81,15 @@ const TopBar = ({
       link.click();
     }
   };
-  // ...
+
+  function handleDelete() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+      canvas.remove(activeObject);
+      canvas.renderAll();
+    }
+  }
+
   return (
     <div className="flex justify-between items-center bg-gray-100 p-4 border-b border-gray-300 w-full">
       <div>
@@ -140,6 +148,7 @@ const TopBar = ({
       <button onClick={bringForward}>Bring Forward</button>
 
       <button onClick={sendBackwards}>Send Backwards</button>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 };
