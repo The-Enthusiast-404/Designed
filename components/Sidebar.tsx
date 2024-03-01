@@ -8,6 +8,32 @@ import { LuShapes } from "react-icons/lu";
 import TechIcon1 from "@/public/images/tech-icons/tech_icon_1.svg";
 import TechIcon2 from "@/public/images/tech-icons/tech_icon_2.svg";
 import TechIcon3 from "@/public/images/tech-icons/tech_icon_3.svg";
+import TechIcon4 from "@/public/images/tech-icons/tech_icon_4.svg";
+import TechIcon5 from "@/public/images/tech-icons/tech_icon_5.svg";
+import TechIcon6 from "@/public/images/tech-icons/tech_icon_6.svg";
+import TechIcon7 from "@/public/images/tech-icons/tech_icon_7.svg";
+import TechIcon8 from "@/public/images/tech-icons/tech_icon_8.svg";
+import TechIcon9 from "@/public/images/tech-icons/tech_icon_9.svg";
+import TechIcon10 from "@/public/images/tech-icons/tech_icon_10.svg";
+import TechIcon11 from "@/public/images/tech-icons/tech_icon_11.svg";
+import TechIcon12 from "@/public/images/tech-icons/tech_icon_12.svg";
+import TechIcon13 from "@/public/images/tech-icons/tech_icon_13.svg";
+import TechIcon14 from "@/public/images/tech-icons/tech_icon_14.svg";
+import TechIcon15 from "@/public/images/tech-icons/tech_icon_15.svg";
+import TechIcon16 from "@/public/images/tech-icons/tech_icon_16.svg";
+import TechIcon17 from "@/public/images/tech-icons/tech_icon_17.svg";
+import TechIcon18 from "@/public/images/tech-icons/tech_icon_18.svg";
+import TechIcon19 from "@/public/images/tech-icons/tech_icon_19.svg";
+import TechIcon20 from "@/public/images/tech-icons/tech_icon_20.svg";
+import TechIcon21 from "@/public/images/tech-icons/tech_icon_21.svg";
+import TechIcon22 from "@/public/images/tech-icons/tech_icon_22.svg";
+import TechIcon23 from "@/public/images/tech-icons/tech_icon_23.svg";
+import TechIcon24 from "@/public/images/tech-icons/tech_icon_24.svg";
+import TechIcon25 from "@/public/images/tech-icons/tech_icon_25.svg";
+import TechIcon26 from "@/public/images/tech-icons/tech_icon_26.svg";
+import TechIcon27 from "@/public/images/tech-icons/tech_icon_27.svg";
+import TechIcon28 from "@/public/images/tech-icons/tech_icon_28.svg";
+
 import {
   Drawer,
   DrawerClose,
@@ -55,7 +81,31 @@ const Sidebar = ({
     TechIcon1,
     TechIcon2,
     TechIcon3,
-    /*, the rest of your images... */
+    TechIcon4,
+    TechIcon5,
+    TechIcon6,
+    TechIcon7,
+    TechIcon8,
+    TechIcon9,
+    TechIcon10,
+    TechIcon11,
+    TechIcon12,
+    TechIcon13,
+    TechIcon14,
+    TechIcon15,
+    TechIcon16,
+    TechIcon17,
+    TechIcon18,
+    TechIcon19,
+    TechIcon20,
+    TechIcon21,
+    TechIcon22,
+    TechIcon23,
+    TechIcon24,
+    TechIcon25,
+    TechIcon26,
+    TechIcon27,
+    TechIcon28,
   ];
 
   const shapes = [
@@ -287,8 +337,7 @@ const Sidebar = ({
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-            <DrawerDescription>This action cannot be undone.</DrawerDescription>
+            <DrawerTitle>Select an icon</DrawerTitle>
           </DrawerHeader>
 
           {/* Scrollable list of images */}
@@ -314,13 +363,6 @@ const Sidebar = ({
               />
             ))}
           </div>
-
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </div>

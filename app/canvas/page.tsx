@@ -5,16 +5,6 @@ import { fabric } from "fabric";
 import CanvasComponent from "@/components/CanvasComponent";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 
 const Canvas = () => {
