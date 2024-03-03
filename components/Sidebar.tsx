@@ -42,12 +42,14 @@ const Sidebar = ({
   addText,
   addImage,
   isLocked,
+  addQuoteTemplate,
 }: {
   canvas: fabric.Canvas; // specify the type of canvas here
   toggleDrawing?: (canvas: fabric.Canvas) => void;
   addText?: (canvas: fabric.Canvas) => void; // specify the type of canvas here
   addImage?: () => void;
   isLocked?: boolean;
+  addQuoteTemplate?: () => void;
 }) => {
   // ...
   // const images = [
@@ -257,7 +259,7 @@ const Sidebar = ({
 
   return (
     <div className="flex flex-col justify-start items-center gap-10 bg-gray-800 p-4 border-r border-gray-800 text-white">
-      <button className="mb-4 font-bold text-lg">
+      <button onClick={addQuoteTemplate} className="mb-4 font-bold text-lg">
         <GrTemplate size={50} />
       </button>
       <button onClick={() => toggleDrawing && toggleDrawing(canvas)}>
@@ -317,25 +319,134 @@ const Sidebar = ({
           <div
             style={{
               display: "flex", // Use Flexbox
-              flexWrap: "wrap", // Allow the items to wrap to the next line
+              flexDirection: "column", // Stack the items vertically
+              gap: "20px", // Add space between the items
               overflowY: "scroll", // Make the content scrollable
               maxHeight: "200px", // Set a max height
+              padding: "10px", // Add some padding
             }}
           >
-            {Array.from({ length: 28 }).map((_, index) => (
-              <Image
-                src={`/images/tech-icons/tech_icon_${index + 1}.svg`}
-                width="64"
-                height="64"
-                alt={`Image ${index}`}
-                onClick={() =>
-                  addSVGToCanvas(
-                    `/images/tech-icons/tech_icon_${index + 1}.svg`,
-                    canvas
-                  )
-                }
-              />
-            ))}
+            <h1>Tech Icons</h1>
+            <div
+              style={{
+                display: "flex", // Use Flexbox
+                flexWrap: "wrap", // Allow the items to wrap to the next line
+                gap: "10px", // Add space between the items
+              }}
+            >
+              {Array.from({ length: 28 }).map((_, index) => (
+                <Image
+                  src={`/images/tech-icons/tech_icon_${index + 1}.svg`}
+                  width="64"
+                  height="64"
+                  alt={`Image ${index}`}
+                  onClick={() =>
+                    addSVGToCanvas(
+                      `/images/tech-icons/tech_icon_${index + 1}.svg`,
+                      canvas
+                    )
+                  }
+                />
+              ))}
+            </div>
+
+            <h1>Engineering Icons</h1>
+            <div
+              style={{
+                display: "flex", // Use Flexbox
+                flexWrap: "wrap", // Allow the items to wrap to the next line
+                gap: "10px", // Add space between the items
+              }}
+            >
+              {Array.from({ length: 62 }).map((_, index) => (
+                <Image
+                  src={`/images/engineering-icons/engineering_icon_${
+                    index + 1
+                  }.svg`}
+                  width="64"
+                  height="64"
+                  alt={`Image ${index}`}
+                  onClick={() =>
+                    addSVGToCanvas(
+                      `/images/engineering-icons/engineering_icon_${
+                        index + 1
+                      }.svg`,
+                      canvas
+                    )
+                  }
+                />
+              ))}
+            </div>
+
+            <h1>Military Icons</h1>
+            <div
+              style={{
+                display: "flex", // Use Flexbox
+                flexWrap: "wrap", // Allow the items to wrap to the next line
+                gap: "10px", // Add space between the items
+              }}
+            >
+              {Array.from({ length: 50 }).map((_, index) => (
+                <Image
+                  src={`/images/military-icons/military_icon_${index + 1}.svg`}
+                  width="64"
+                  height="64"
+                  alt={`Image ${index}`}
+                  onClick={() =>
+                    addSVGToCanvas(
+                      `/images/military-icons/military_icon_${index + 1}.svg`,
+                      canvas
+                    )
+                  }
+                />
+              ))}
+            </div>
+            <h1>Science Icons</h1>
+            <div
+              style={{
+                display: "flex", // Use Flexbox
+                flexWrap: "wrap", // Allow the items to wrap to the next line
+                gap: "10px", // Add space between the items
+              }}
+            >
+              {Array.from({ length: 50 }).map((_, index) => (
+                <Image
+                  src={`/images/science-icons/science_icon_${index + 1}.svg`}
+                  width="64"
+                  height="64"
+                  alt={`Image ${index}`}
+                  onClick={() =>
+                    addSVGToCanvas(
+                      `/images/science-icons/science_icon_${index + 1}.svg`,
+                      canvas
+                    )
+                  }
+                />
+              ))}
+            </div>
+            <h1>Arrow Icons</h1>
+            <div
+              style={{
+                display: "flex", // Use Flexbox
+                flexWrap: "wrap", // Allow the items to wrap to the next line
+                gap: "10px", // Add space between the items
+              }}
+            >
+              {Array.from({ length: 200 }).map((_, index) => (
+                <Image
+                  src={`/images/arrow-icons/arrow_icon_${index + 1}.svg`}
+                  width="64"
+                  height="64"
+                  alt={`Image ${index}`}
+                  onClick={() =>
+                    addSVGToCanvas(
+                      `/images/arrow-icons/arrow_icon_${index + 1}.svg`,
+                      canvas
+                    )
+                  }
+                />
+              ))}
+            </div>
           </div>
         </DrawerContent>
       </Drawer>

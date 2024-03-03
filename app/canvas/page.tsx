@@ -497,6 +497,43 @@ const Canvas = () => {
     canvas.requestRenderAll();
   };
 
+  function addQuoteTemplate() {
+    // Add a background image
+    fabric.Image.fromURL(
+      "https://picsum.photos/800/600", // generates a random 800x600 image
+      (img) => {
+        img.set({
+          left: 0,
+          top: 0,
+          scaleX: canvas.width / img.width,
+          scaleY: canvas.height / img.height,
+        });
+        canvas.setBackgroundImage(
+          img,
+          () => {
+            // Add a text element
+            const text = new fabric.IText("Your quote here", {
+              left: canvas.width / 2,
+              top: canvas.height / 2,
+              fontSize: 20,
+              textAlign: "center",
+              originX: "center",
+              originY: "center",
+            });
+            canvas.add(text);
+
+            canvas.renderAll();
+          },
+          {
+            backgroundImageOpacity: 0.5,
+            backgroundImageStretch: true,
+          }
+        );
+      },
+      { crossOrigin: "anonymous" } // needed to avoid CORS issues
+    );
+  }
+
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
@@ -507,6 +544,7 @@ const Canvas = () => {
           addImage={addImage}
           addText={addText}
           isLocked={isLocked}
+          addQuoteTemplate={addQuoteTemplate}
         />
       )}
 
