@@ -6,6 +6,7 @@ import CanvasComponent from "@/components/CanvasComponent";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import { Button } from "@/components/ui/button";
+import BrushOptions from "@/components/BrushOptions";
 
 const Canvas = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -534,6 +535,50 @@ const Canvas = () => {
     );
   }
 
+  const handleBrushChange = (brushType: string) => {
+    if (!canvas) return;
+    switch (brushType) {
+      case "highlighter":
+        canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+        canvas.freeDrawingBrush.width = 30; // wider brush width
+        canvas.freeDrawingBrush.color = "#ffff00"; // yellow color
+        break;
+      case "pen":
+        canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+        canvas.freeDrawingBrush.width = 5; // narrower brush width
+        canvas.freeDrawingBrush.color = "#000000"; // black color
+        break;
+      case "pencil":
+        canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+        canvas.freeDrawingBrush.width = 2; // very narrow brush width
+        canvas.freeDrawingBrush.color = "#000000"; // black color
+        break;
+      case "brush":
+        canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
+        canvas.freeDrawingBrush.width = 10; // medium brush width
+        canvas.freeDrawingBrush.color = "#000000"; // black color
+        break;
+      case "marker":
+        canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+        canvas.freeDrawingBrush.width = 10; // medium brush width
+        canvas.freeDrawingBrush.color = "#ff0000"; // red color
+        break;
+      default:
+        canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+        canvas.freeDrawingBrush.width = 5; // default brush width
+        canvas.freeDrawingBrush.color = "#000000"; // default brush color
+        break;
+    }
+  };
+
+  const handleOpacityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!canvas || !canvas.freeDrawingBrush) return;
+    const opacity = parseFloat(event.target.value);
+    const color = new fabric.Color(canvas.freeDrawingBrush.color);
+    color.setAlpha(opacity);
+    canvas.freeDrawingBrush.color = color.toRgba();
+  };
+
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
@@ -561,6 +606,12 @@ const Canvas = () => {
           />
         }
         <CanvasComponent />
+        {isDrawingEnabled && (
+          <BrushOptions
+            handleBrushChange={handleBrushChange}
+            handleOpacityChange={handleOpacityChange}
+          />
+        )}
       </div>
       <Button onClick={() => groupObjects(canvas)}>Group</Button>
       <Button onClick={() => ungroupObjects(canvas)}>Ungroup</Button>
