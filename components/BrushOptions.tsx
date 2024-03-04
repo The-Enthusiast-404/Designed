@@ -11,12 +11,14 @@ interface BrushOptionsProps {
   handleBrushChange: (brushType: string) => void;
   handleOpacityChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleBrushColorChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  brushOpacity: number;
 }
 
 const BrushOptions: React.FC<BrushOptionsProps> = ({
   handleBrushChange,
   handleOpacityChange,
   handleBrushColorChange,
+  brushOpacity,
 }) => {
   const [selectedBrush, setSelectedBrush] = useState<string>("pen");
 
@@ -84,6 +86,7 @@ const BrushOptions: React.FC<BrushOptionsProps> = ({
           min="0"
           max="1"
           step="0.1"
+          value={brushOpacity}
           onChange={handleOpacityChange}
         />
       </div>

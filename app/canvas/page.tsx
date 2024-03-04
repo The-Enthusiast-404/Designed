@@ -19,6 +19,7 @@ const Canvas = () => {
   const [isDrawingEnabled, setIsDrawingEnabled] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [canvasColor, setCanvasColor] = useState("#ffffff");
+  const [brushOpacity, setBrushOpacity] = useState(1);
   const canvasRef = useRef(null);
   const images = [
     /*, the rest of your images... */
@@ -569,6 +570,10 @@ const Canvas = () => {
         canvas.freeDrawingBrush.color = "#000000"; // default brush color
         break;
     }
+    if (canvas.freeDrawingBrush) {
+      const color = new fabric.Color(canvas.freeDrawingBrush.color);
+      setBrushOpacity(color.getAlpha());
+    }
   };
 
   const handleOpacityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -577,6 +582,7 @@ const Canvas = () => {
     const color = new fabric.Color(canvas.freeDrawingBrush.color);
     color.setAlpha(opacity);
     canvas.freeDrawingBrush.color = color.toRgba();
+    setBrushOpacity(opacity);
   };
 
   const handleBrushColorChange = (
@@ -618,6 +624,7 @@ const Canvas = () => {
             handleBrushChange={handleBrushChange}
             handleOpacityChange={handleOpacityChange}
             handleBrushColorChange={handleBrushColorChange}
+            brushOpacity={brushOpacity}
           />
         )}
       </div>
