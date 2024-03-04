@@ -10,11 +10,13 @@ import {
 interface BrushOptionsProps {
   handleBrushChange: (brushType: string) => void;
   handleOpacityChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBrushColorChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const BrushOptions: React.FC<BrushOptionsProps> = ({
   handleBrushChange,
   handleOpacityChange,
+  handleBrushColorChange,
 }) => {
   const [selectedBrush, setSelectedBrush] = useState<string>("pen");
 
@@ -73,7 +75,6 @@ const BrushOptions: React.FC<BrushOptionsProps> = ({
           <span>Marker</span>
         </div>
       </div>
-
       {/* Brush opacity */}
       <div className="flex flex-col items-center">
         <label htmlFor="brushOpacity">Opacity:</label>
@@ -85,6 +86,12 @@ const BrushOptions: React.FC<BrushOptionsProps> = ({
           step="0.1"
           onChange={handleOpacityChange}
         />
+      </div>
+      {/* Brush color */}
+
+      <div className="flex flex-col items-center">
+        <label htmlFor="brushColor">Color:</label>
+        <input type="color" id="brushColor" onChange={handleBrushColorChange} />
       </div>
     </div>
   );

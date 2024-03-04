@@ -292,24 +292,24 @@ const Canvas = () => {
     setStrokeColor(event.target.value);
   };
 
-  const handleBrushColorChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (isLocked) {
-      alert("The canvas is locked. Unlock it to add new shapes.");
-      return;
-    }
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.set({ stroke: event.target.value });
-      canvas?.requestRenderAll();
-      setBrushColor(event.target.value); // Update the color state
-    }
-    setBrushColor(event.target.value); // Update the brush color state
-    if (canvas?.isDrawingMode) {
-      canvas.freeDrawingBrush.color = event.target.value; // Update the color of the brush directly
-    }
-  };
+  // const handleBrushColorChange = (
+  //   event: React.ChangeEvent<HTMLInputElement>
+  // ) => {
+  //   if (isLocked) {
+  //     alert("The canvas is locked. Unlock it to add new shapes.");
+  //     return;
+  //   }
+  //   const selectedObject = canvas?.getActiveObject();
+  //   if (selectedObject) {
+  //     selectedObject.set({ stroke: event.target.value });
+  //     canvas?.requestRenderAll();
+  //     setBrushColor(event.target.value); // Update the color state
+  //   }
+  //   setBrushColor(event.target.value); // Update the brush color state
+  //   if (canvas?.isDrawingMode) {
+  //     canvas.freeDrawingBrush.color = event.target.value; // Update the color of the brush directly
+  //   }
+  // };
 
   const handleStrokeWidthChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -579,6 +579,13 @@ const Canvas = () => {
     canvas.freeDrawingBrush.color = color.toRgba();
   };
 
+  const handleBrushColorChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!canvas || !canvas.freeDrawingBrush) return;
+    canvas.freeDrawingBrush.color = event.target.value;
+  };
+
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
@@ -610,6 +617,7 @@ const Canvas = () => {
           <BrushOptions
             handleBrushChange={handleBrushChange}
             handleOpacityChange={handleOpacityChange}
+            handleBrushColorChange={handleBrushColorChange}
           />
         )}
       </div>
