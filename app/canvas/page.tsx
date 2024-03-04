@@ -20,6 +20,7 @@ const Canvas = () => {
   const [isLocked, setIsLocked] = useState(false);
   const [canvasColor, setCanvasColor] = useState("#ffffff");
   const [brushOpacity, setBrushOpacity] = useState(1);
+  const [brushSize, setBrushSize] = useState(1);
   const canvasRef = useRef(null);
   const images = [
     /*, the rest of your images... */
@@ -574,6 +575,9 @@ const Canvas = () => {
       const color = new fabric.Color(canvas.freeDrawingBrush.color);
       setBrushOpacity(color.getAlpha());
     }
+    if (canvas.freeDrawingBrush) {
+      setBrushSize(canvas.freeDrawingBrush.width);
+    }
   };
 
   const handleOpacityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -590,6 +594,15 @@ const Canvas = () => {
   ) => {
     if (!canvas || !canvas.freeDrawingBrush) return;
     canvas.freeDrawingBrush.color = event.target.value;
+  };
+
+  const handleBrushSizeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!canvas || !canvas.freeDrawingBrush) return;
+    const size = parseInt(event.target.value, 10);
+    canvas.freeDrawingBrush.width = size;
+    setBrushSize(size);
   };
 
   return (
@@ -624,7 +637,9 @@ const Canvas = () => {
             handleBrushChange={handleBrushChange}
             handleOpacityChange={handleOpacityChange}
             handleBrushColorChange={handleBrushColorChange}
+            handleBrushSizeChange={handleBrushSizeChange}
             brushOpacity={brushOpacity}
+            brushSize={brushSize}
           />
         )}
       </div>
