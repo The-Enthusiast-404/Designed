@@ -1,11 +1,18 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-
 const canvasSizes = [
   { width: 800, height: 600, label: "4:3" },
   { width: 1280, height: 720, label: "16:9" },
   { width: 1080, height: 1080, label: "1:1" },
+  { width: 2560, height: 1440, label: "YouTube Cover Page" },
+  { width: 1128, height: 191, label: "LinkedIn Cover Page" },
+  { width: 1500, height: 500, label: "Twitter Cover Page" },
+  { width: 820, height: 312, label: "Facebook Cover Page" },
+  { width: 1080, height: 1080, label: "Instagram Post" },
+  { width: 1080, height: 1920, label: "WhatsApp Story" },
+  { width: 1080, height: 1920, label: "Instagram Story" },
+  // Add more sizes as needed
 ];
 
 const LandingPage = () => {
