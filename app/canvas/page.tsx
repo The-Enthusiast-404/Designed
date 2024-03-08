@@ -7,8 +7,10 @@ import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import { Button } from "@/components/ui/button";
 import BrushOptions from "@/components/BrushOptions";
+import { useSearchParams } from "next/navigation";
 
 const Canvas = () => {
+  const params = useSearchParams();
   const [canvas, setCanvas] = useState<fabric.Canvas>();
   const [color, setColor] = useState("#2BEBC8");
   const [imageUrl, setImageUrl] = useState("");
@@ -22,6 +24,7 @@ const Canvas = () => {
   const [brushOpacity, setBrushOpacity] = useState(1);
   const [brushSize, setBrushSize] = useState(1);
   const canvasRef = useRef(null);
+
   const images = [
     /*, the rest of your images... */
   ];
@@ -41,8 +44,8 @@ const Canvas = () => {
 
   useEffect(() => {
     const canvas = new fabric.Canvas("canvas", {
-      height: 400,
-      width: 800,
+      height: Number(params.get("pageHeight")),
+      width: Number(params.get("pageWidth")),
       backgroundColor: canvasColor,
     });
 
