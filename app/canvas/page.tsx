@@ -615,6 +615,48 @@ const Canvas = () => {
     setBrushSize(size);
   };
 
+  function handleDelete() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+      canvas.remove(activeObject);
+      canvas.renderAll();
+    }
+  }
+
+  function handleClone() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+      activeObject.clone((cloned) => {
+        canvas.add(cloned);
+        cloned
+          .set({ left: cloned.left + 10, top: cloned.top + 10 })
+          .setCoords();
+        canvas.renderAll();
+      });
+    }
+  }
+
+  let copiedObject = null;
+
+  function handleCopy() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+      copiedObject = fabric.util.object.clone(activeObject);
+    }
+  }
+
+  function handlePaste() {
+    if (copiedObject) {
+      copiedObject.clone((cloned) => {
+        canvas.add(cloned);
+        cloned
+          .set({ left: cloned.left + 10, top: cloned.top + 10 })
+          .setCoords();
+        canvas.renderAll();
+      });
+    }
+  }
+
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
@@ -658,6 +700,10 @@ const Canvas = () => {
             <ContextMenuItem onSelect={bringToFront}>
               Send to Front
             </ContextMenuItem>
+            <ContextMenuItem onSelect={handleDelete}>Delete</ContextMenuItem>
+            <ContextMenuItem onSelect={handleClone}>Clone</ContextMenuItem>
+            <ContextMenuItem onSelect={handleCopy}>Copy</ContextMenuItem>
+            <ContextMenuItem onSelect={handlePaste}>Paste</ContextMenuItem>
           </ContextMenuContent>
         </ContextMenu>
 
