@@ -657,6 +657,12 @@ const Canvas = () => {
     }
   }
 
+  const clearCanvas = () => {
+    if (canvas) {
+      canvas.clear();
+    }
+  };
+
   return (
     <div className="flex h-screen text-black">
       {/* Sidebar */}
@@ -704,6 +710,7 @@ const Canvas = () => {
             <ContextMenuItem onSelect={handleClone}>Clone</ContextMenuItem>
             <ContextMenuItem onSelect={handleCopy}>Copy</ContextMenuItem>
             <ContextMenuItem onSelect={handlePaste}>Paste</ContextMenuItem>
+            <ContextMenuItem onSelect={clearCanvas}>Delete All</ContextMenuItem>
           </ContextMenuContent>
         </ContextMenu>
 

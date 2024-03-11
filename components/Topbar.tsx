@@ -20,11 +20,6 @@ const TopBar = ({
   toggleLock?: () => void;
   isLocked?: boolean;
 }) => {
-  const clearCanvas = () => {
-    if (canvas) {
-      canvas.clear();
-    }
-  };
   const downloadAsPNG = () => {
     if (canvas) {
       const dataURL = canvas.toDataURL({
@@ -35,38 +30,6 @@ const TopBar = ({
       link.download = "canvas.png";
       link.href = dataURL;
       link.click();
-    }
-  };
-
-  const bringToFront = () => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.bringToFront();
-      canvas?.requestRenderAll();
-    }
-  };
-
-  const sendToBack = () => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.sendToBack();
-      canvas?.requestRenderAll();
-    }
-  };
-
-  const bringForward = () => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.bringForward();
-      canvas?.requestRenderAll();
-    }
-  };
-
-  const sendBackwards = () => {
-    const selectedObject = canvas?.getActiveObject();
-    if (selectedObject) {
-      selectedObject.sendBackwards();
-      canvas?.requestRenderAll();
     }
   };
 
@@ -82,75 +45,8 @@ const TopBar = ({
     }
   };
 
-  function handleDelete() {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-      canvas.remove(activeObject);
-      canvas.renderAll();
-    }
-  }
-
-  function handleClone() {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-      activeObject.clone((cloned) => {
-        canvas.add(cloned);
-        cloned
-          .set({ left: cloned.left + 10, top: cloned.top + 10 })
-          .setCoords();
-        canvas.renderAll();
-      });
-    }
-  }
-
-  let copiedObject = null;
-
-  function handleCopy() {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-      copiedObject = fabric.util.object.clone(activeObject);
-    }
-  }
-
-  function handlePaste() {
-    if (copiedObject) {
-      copiedObject.clone((cloned) => {
-        canvas.add(cloned);
-        cloned
-          .set({ left: cloned.left + 10, top: cloned.top + 10 })
-          .setCoords();
-        canvas.renderAll();
-      });
-    }
-  }
-
   return (
     <div className="flex justify-between items-center bg-gray-100 p-4 border-b border-gray-300 w-full">
-      <div>
-        <input
-          type="color"
-          id="brushColor"
-          name="brushColor"
-          onChange={handleBrushColorChange}
-        />
-        <label htmlFor="brushColor" className="block text-sm text-black-700">
-          Choose brush color
-        </label>
-      </div>
-      <div>
-        <select
-          className="px-4 py-2 border rounded bg-white text-black h-10"
-          onChange={(event) => setBrushWidth(parseInt(event.target.value))}
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-        </select>
-        <label htmlFor="brushWidth" className="block text-sm text-black-700">
-          Choose brush size
-        </label>
-      </div>
       <div>
         <input
           type="color"
@@ -170,22 +66,9 @@ const TopBar = ({
       >
         {isLocked ? <FiLock /> : <FiUnlock />} Toggle Lock
       </button>
-      <button onClick={clearCanvas}>
-        <MdDeleteOutline size={44} />
-      </button>
+
       <button onClick={downloadAsPNG}>Download as PNG</button>
       <button onClick={downloadAsSVG}>Download as SVG</button>
-      <button onClick={bringToFront}>Bring to Front</button>
-
-      <button onClick={sendToBack}>Send to Back</button>
-
-      <button onClick={bringForward}>Bring Forward</button>
-
-      <button onClick={sendBackwards}>Send Backwards</button>
-      <button onClick={handleDelete}>Delete</button>
-      <button onClick={handleClone}>Clone</button>
-      <button onClick={handleCopy}>Copy</button>
-      <button onClick={handlePaste}>Paste</button>
     </div>
   );
 };
