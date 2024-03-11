@@ -14,7 +14,11 @@ const Navbar: React.FC<NavbarProps> = ({ projectName, githubUrl }) => {
         <p>{projectName}</p>
       </Link>
       <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-        GitHub
+        <img
+          src="./images/github-mark.png"
+          alt="GitHub"
+          className="w-10 h-10"
+        />
       </a>
     </nav>
   );

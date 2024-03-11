@@ -16,12 +16,12 @@ const canvasSizes = [
 ];
 
 const LandingPage = () => {
-  const handleCanvasSizeClick = (width: number, height: number) => {
-    console.log("handleCanvasSizeClick", width, height);
-  };
-
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 my-0">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-4">Welcome to My Project</h1>
+        <p className="text-lg mb-8">Select a canvas size to get started:</p>
+      </div>
       <div className="grid grid-cols-3 gap-4">
         {canvasSizes.map((size, index) => (
           <Link
@@ -38,6 +38,32 @@ const LandingPage = () => {
           </Link>
         ))}
       </div>
+      <footer className="my-0 mt-auto p-6 text-center bg-gray-200">
+        <p className="text-lg">My Project © 2024</p>
+        <div className="flex justify-center space-x-4 mt-2">
+          <a
+            href="https://github.com/dotslashbit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://twitter.com/introvertedbot"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Twitter
+          </a>
+          <a
+            href="https://linkedin.com/in/sahil-mahapatra"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </footer>
     </div>
   );
 };
