@@ -447,6 +447,60 @@ const Sidebar = ({
                 />
               ))}
             </div>
+            <h1>Sports Equipment Icons</h1>
+            <div
+              style={{
+                display: "flex", // Use Flexbox
+                flexWrap: "wrap", // Allow the items to wrap to the next line
+                gap: "10px", // Add space between the items
+              }}
+            >
+              {Array.from({ length: 98 }).map((_, index) => (
+                <Image
+                  src={`/images/sports-equipment-icons/sports_equipment_icon_${
+                    index + 1
+                  }.svg`}
+                  width="64"
+                  height="64"
+                  alt={`Image ${index}`}
+                  onClick={() =>
+                    addSVGToCanvas(
+                      `/images/sports-equipment-icons/sports_equipment_icon_${
+                        index + 1
+                      }.svg`,
+                      canvas
+                    )
+                  }
+                />
+              ))}
+            </div>
+            <h1>Travel Icons</h1>
+            <div
+              style={{
+                display: "flex", // Use Flexbox
+                flexWrap: "wrap", // Allow the items to wrap to the next line
+                gap: "10px", // Add space between the items
+              }}
+            >
+              {Array.from({ length: 98 }).map((_, index) => (
+                <Image
+                  src={`/images/travel-flat-icons/travel_flat_icon_${
+                    index + 1
+                  }.svg`}
+                  width="64"
+                  height="64"
+                  alt={`Image ${index}`}
+                  onClick={() =>
+                    addSVGToCanvas(
+                      `/images/travel-flat-icons/travel_flat_icon_${
+                        index + 1
+                      }.svg`,
+                      canvas
+                    )
+                  }
+                />
+              ))}
+            </div>
           </div>
         </DrawerContent>
       </Drawer>
