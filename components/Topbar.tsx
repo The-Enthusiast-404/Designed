@@ -1,6 +1,12 @@
 import React from "react";
 import { FiLock, FiUnlock } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "./ui/button";
 
 const TopBar = ({
   canvas,
@@ -66,9 +72,13 @@ const TopBar = ({
       >
         {isLocked ? <FiLock /> : <FiUnlock />} Toggle Lock
       </button>
-
-      <button onClick={downloadAsPNG}>Download as PNG</button>
-      <button onClick={downloadAsSVG}>Download as SVG</button>
+      <Popover>
+        <PopoverTrigger>Download</PopoverTrigger>
+        <PopoverContent>
+          <Button onClick={downloadAsSVG}>Download as SVG</Button>
+          <Button onClick={downloadAsPNG}>Download as PNG</Button>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
