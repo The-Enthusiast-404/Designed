@@ -9,6 +9,13 @@ import { Button } from "@/components/ui/button";
 import BrushOptions from "@/components/BrushOptions";
 import { useSearchParams } from "next/navigation";
 
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+
 const Canvas = () => {
   const params = useSearchParams();
   const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -634,7 +641,26 @@ const Canvas = () => {
             isLocked={isLocked}
           />
         }
-        <CanvasComponent />
+        <ContextMenu>
+          <ContextMenuTrigger>
+            <CanvasComponent />
+          </ContextMenuTrigger>
+          <ContextMenuContent>
+            <ContextMenuItem onSelect={sendBackwards}>
+              Send Backward
+            </ContextMenuItem>
+            <ContextMenuItem onSelect={bringForward}>
+              Bring Forward
+            </ContextMenuItem>
+            <ContextMenuItem onSelect={sendToBack}>
+              Send to Back
+            </ContextMenuItem>
+            <ContextMenuItem onSelect={bringToFront}>
+              Send to Front
+            </ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
+
         {isDrawingEnabled && (
           <BrushOptions
             handleBrushChange={handleBrushChange}
