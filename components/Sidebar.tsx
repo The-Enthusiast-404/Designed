@@ -322,7 +322,6 @@ const Sidebar = ({
               flexDirection: "column", // Stack the items vertically
               gap: "20px", // Add space between the items
               overflowY: "scroll", // Make the content scrollable
-              maxHeight: "200px", // Set a max height
               padding: "10px", // Add some padding
             }}
           >
