@@ -73,10 +73,22 @@ const TopBar = ({
         {isLocked ? <FiLock /> : <FiUnlock />} Toggle Lock
       </button>
       <Popover>
-        <PopoverTrigger>Download</PopoverTrigger>
-        <PopoverContent>
-          <Button onClick={downloadAsSVG}>Download as SVG</Button>
-          <Button onClick={downloadAsPNG}>Download as PNG</Button>
+        <PopoverTrigger className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          Download
+        </PopoverTrigger>
+        <PopoverContent className="bg-white rounded shadow-lg p-4">
+          <Button
+            onClick={downloadAsSVG}
+            className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 mb-2"
+          >
+            Download as SVG
+          </Button>
+          <Button
+            onClick={downloadAsPNG}
+            className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Download as PNG
+          </Button>
         </PopoverContent>
       </Popover>
     </div>
