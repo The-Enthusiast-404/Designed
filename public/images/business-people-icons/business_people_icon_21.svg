@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Icon_Set" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:#FFB300;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:#90CAF9;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st3{fill:#FFFFFF;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:#FF7043;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st5{fill:#9CCC65;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st6{fill:#37474F;}
+	.st7{fill:#37474F;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st8{fill:none;stroke:#37474F;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g id="Connections">
+	<g>
+		<g>
+			<g>
+				<circle class="st0" cx="8.5" cy="50" r="5"/>
+				<path class="st1" d="M12,47.1l0.4-0.3C11.4,45.7,10,45,8.5,45c-2.8,0-5,2.2-5,5H4C6.9,50,9.7,49,12,47.1z"/>
+			</g>
+			<g>
+				<path class="st0" d="M8.5,55c-0.9,0-1.8-0.3-2.5-0.7l0,1.2L8.5,60l2.5-4.5l0-1.2C10.3,54.7,9.4,55,8.5,55z"/>
+				<path class="st0" d="M16.5,63.5v-3.9c0-1-0.6-1.9-1.5-2.3l-4-1.8L8.5,60"/>
+				<path class="st0" d="M8.5,60L6,55.5l-4,1.8c-0.9,0.4-1.5,1.3-1.5,2.3v3.9"/>
+				<line class="st0" x1="8.5" y1="60" x2="8.5" y2="63.5"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<circle class="st0" cx="55.5" cy="50" r="5"/>
+				<path class="st1" d="M59,47.1l0.4-0.3C58.4,45.7,57,45,55.5,45c-2.8,0-5,2.2-5,5H51C53.9,50,56.7,49,59,47.1z"/>
+			</g>
+			<g>
+				<path class="st0" d="M55.5,55c-0.9,0-1.8-0.3-2.5-0.7l0,1.2l2.5,4.5l2.5-4.5l0-1.2C57.3,54.7,56.4,55,55.5,55z"/>
+				<path class="st0" d="M63.5,63.5v-3.9c0-1-0.6-1.9-1.5-2.3l-4-1.8"/>
+				<path class="st0" d="M53,55.5l-4,1.8c-0.9,0.4-1.5,1.3-1.5,2.3v3.9"/>
+				<line class="st0" x1="55.5" y1="60" x2="55.5" y2="63.5"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<circle class="st0" cx="8.5" cy="5.5" r="5"/>
+				<path class="st1" d="M12,2.6l0.4-0.3C11.4,1.2,10,0.5,8.5,0.5c-2.8,0-5,2.2-5,5H4C6.9,5.5,9.7,4.5,12,2.6z"/>
+			</g>
+			<g>
+				<path class="st0" d="M8.5,10.5c-0.9,0-1.8-0.3-2.5-0.7L6,11l2.5,4.5L11,11l0-1.2C10.3,10.2,9.4,10.5,8.5,10.5z"/>
+				<path class="st0" d="M16.5,19v-3.9c0-1-0.6-1.9-1.5-2.3L11,11"/>
+				<path class="st0" d="M6,11l-4,1.8c-0.9,0.4-1.5,1.3-1.5,2.3V19"/>
+				<line class="st0" x1="8.5" y1="15.5" x2="8.5" y2="19"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<circle class="st0" cx="55.5" cy="5.5" r="5"/>
+				<path class="st1" d="M59,2.6l0.4-0.3c-0.9-1.1-2.3-1.8-3.8-1.8c-2.8,0-5,2.2-5,5H51C53.9,5.5,56.7,4.5,59,2.6z"/>
+			</g>
+			<g>
+				<path class="st0" d="M55.5,10.5c-0.9,0-1.8-0.3-2.5-0.7l0,1.2l2.5,4.5L58,11l0-1.2C57.3,10.2,56.4,10.5,55.5,10.5z"/>
+				<path class="st0" d="M63.5,19v-3.9c0-1-0.6-1.9-1.5-2.3L58,11"/>
+				<path class="st0" d="M53,11l-4,1.8c-0.9,0.4-1.5,1.3-1.5,2.3V19"/>
+				<line class="st0" x1="55.5" y1="15.5" x2="55.5" y2="19"/>
+			</g>
+		</g>
+		<g>
+			<line class="st0" x1="28" y1="14" x2="33" y2="14"/>
+			<line class="st0" x1="35" y1="14" x2="36" y2="14"/>
+		</g>
+		<g>
+			<line class="st0" x1="36" y1="56" x2="31" y2="56"/>
+			<line class="st0" x1="29" y1="56" x2="28" y2="56"/>
+		</g>
+		<g>
+			<line class="st0" x1="41.2" y1="45.2" x2="45" y2="49"/>
+			<line class="st0" x1="19" y1="23" x2="22.8" y2="26.8"/>
+			<line class="st0" x1="22.8" y1="45.2" x2="19" y2="49"/>
+			<line class="st0" x1="45" y1="23" x2="41.2" y2="26.8"/>
+		</g>
+		<circle class="st2" cx="32" cy="36" r="13"/>
+		<g>
+			<g>
+				<circle class="st3" cx="32" cy="31.8" r="5"/>
+				<path class="st1" d="M35.5,28.9l0.4-0.3c-0.9-1.1-2.3-1.8-3.8-1.8c-2.8,0-5,2.2-5,5h0.5C30.4,31.8,33.2,30.7,35.5,28.9z"/>
+			</g>
+			<g>
+				<path class="st3" d="M29.5,37.3l-4,1.8c-0.9,0.4-1.5,1.3-1.5,2.3v1.9l16,0v-1.9c0-1-0.6-1.9-1.5-2.3l-4-1.8"/>
+				<path class="st3" d="M32,36.7c-0.9,0-1.8-0.3-2.5-0.7l0,1.2l2.5,4.5l2.5-4.5l0-1.2C33.8,36.5,32.9,36.7,32,36.7z"/>
+				<line class="st0" x1="32" y1="41.7" x2="32" y2="43.3"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

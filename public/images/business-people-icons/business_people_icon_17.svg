@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Icon_Set" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:#FFB300;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:#90CAF9;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st3{fill:#FFFFFF;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:#FF7043;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st5{fill:#9CCC65;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st6{fill:#37474F;}
+	.st7{fill:#37474F;stroke:#37474F;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st8{fill:none;stroke:#37474F;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g id="Chaos">
+	<g>
+		<g>
+			<line class="st0" x1="13.5" y1="5.5" x2="8.5" y2="5.5"/>
+			<line class="st0" x1="6.5" y1="5.5" x2="5.5" y2="5.5"/>
+		</g>
+		<g>
+			<line class="st0" x1="55.5" y1="53.5" x2="60.5" y2="53.5"/>
+			<line class="st0" x1="62.5" y1="53.5" x2="63.5" y2="53.5"/>
+		</g>
+		<line class="st0" x1="45.3" y1="29.6" x2="40.2" y2="27.5"/>
+		<g>
+			<g>
+				<ellipse transform="matrix(0.9239 -0.3827 0.3827 0.9239 -5.6933 7.3518)" class="st0" cx="15.6" cy="18" rx="6" ry="6"/>
+				<g>
+					<path class="st1" d="M10.5,16.4l-0.6-0.2c0.5-1.6,1.7-3,3.4-3.8c3.1-1.3,6.6,0.2,7.8,3.2l-0.5,0.2
+						C17.4,17.2,13.8,17.4,10.5,16.4z"/>
+				</g>
+			</g>
+			<g>
+				<path class="st0" d="M27.3,46.2l5.3,15.2c0.2,0.5-0.1,1-0.6,1.3l-2,0.8c-0.5,0.2-1.1,0-1.3-0.5l-7-14.5"/>
+				<path class="st0" d="M15.7,35.4c-0.1,1.9-1.3,3.5-3.1,4.3l-7.5,3.1l-1.5-3.7l8.1-3.4l0.5-6.8c0.1-1.9,1.3-3.5,3.1-4.3l7.1-3
+					c0.7-0.3,1.5-0.4,2.3-0.4l8.1,0.6c1.9,0.1,3.5,1.3,4.3,3.1l3.1,7.5L36.5,34l-3.4-8.1l-7.9-0.6l5,12c1.1,2.6-0.2,5.5-2.7,6.5
+					l-10.2,4.2l3.2,10.1c0.2,0.5-0.1,1-0.6,1.2l-2,0.8c-0.5,0.2-1.1,0-1.3-0.5l-4.9-10.2c-1.2-2.6-0.1-5.7,2.6-6.8l4.3-1.8l-2.9-7
+					L15.7,35.4z"/>
+				<path class="st0" d="M37.2,35.9L37.2,35.9c0.4,1,1.6,1.5,2.6,1.1l0,0c1-0.4,1.5-1.6,1.1-2.6v0"/>
+				<path class="st0" d="M1.7,39.9L1.7,39.9c-1,0.4-1.5,1.6-1.1,2.6l0,0c0.4,1,1.6,1.5,2.6,1.1h0"/>
+				<line class="st0" x1="18.7" y1="41.1" x2="29.8" y2="36.5"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<ellipse transform="matrix(0.3827 -0.9239 0.9239 0.3827 23.8506 48.6987)" class="st0" cx="48.4" cy="6.5" rx="6" ry="6"/>
+				<g>
+					<path class="st1" d="M53.5,4.9l0.6-0.2c-0.5-1.6-1.7-3-3.4-3.8c-3.1-1.3-6.6,0.2-7.8,3.2l0.5,0.2C46.6,5.8,50.2,5.9,53.5,4.9z"
+						/>
+				</g>
+			</g>
+			<g>
+				<path class="st0" d="M62.3,28.4L62.3,28.4c1,0.4,1.5,1.6,1.1,2.6l0,0c-0.4,1-1.6,1.5-2.6,1.1l0,0"/>
+				<path class="st0" d="M35.8,37.3l-4.3,12.5c-0.2,0.5,0.1,1,0.6,1.3l2,0.8c0.5,0.2,1.1,0,1.3-0.5l6.5-13.3"/>
+				<polyline class="st0" points="28.8,19.6 30.9,14.4 38.8,13.9 35.9,20.8 				"/>
+				<path class="st0" d="M43.1,35.2l3.6,1.5l-3.2,10.1c-0.2,0.5,0.1,1,0.6,1.2l2,0.8c0.5,0.2,1.1,0,1.3-0.5l4.9-10.2
+					c1.2-2.6,0.1-5.7-2.6-6.8l-4.3-1.8l2.9-7l0.1,1.3c0.1,1.9,1.3,3.5,3.1,4.3l7.5,3.1l1.5-3.7l-8.1-3.4l-0.5-6.8
+					c-0.1-1.9-1.3-3.5-3.1-4.3l-7.1-3c-0.7-0.3-1.5-0.4-2.3-0.4l-8.1,0.6c-1.9,0.1-3.5,1.3-4.3,3.1l-2.4,5.8"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

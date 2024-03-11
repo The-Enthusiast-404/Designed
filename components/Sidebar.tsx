@@ -500,6 +500,34 @@ const Sidebar = ({
                 />
               ))}
             </div>
+
+            <h1>Business People Icons</h1>
+            <div
+              style={{
+                display: "flex", // Use Flexbox
+                flexWrap: "wrap", // Allow the items to wrap to the next line
+                gap: "10px", // Add space between the items
+              }}
+            >
+              {Array.from({ length: 62 }).map((_, index) => (
+                <Image
+                  src={`/images/business-people-icons/business_people_icon_${
+                    index + 1
+                  }.svg`}
+                  width="64"
+                  height="64"
+                  alt={`Image ${index}`}
+                  onClick={() =>
+                    addSVGToCanvas(
+                      `/images/business-people-icons/business_people_icon_${
+                        index + 1
+                      }.svg`,
+                      canvas
+                    )
+                  }
+                />
+              ))}
+            </div>
           </div>
         </DrawerContent>
       </Drawer>
