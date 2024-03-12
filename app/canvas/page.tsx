@@ -239,6 +239,57 @@ const Canvas = () => {
     }
   };
 
+  const handleFontStyleChange = (style: string) => {
+    if (selectedTextObject) {
+      switch (style) {
+        case "bold":
+          selectedTextObject.set(
+            "fontWeight",
+            selectedTextObject.fontWeight === "bold" ? "normal" : "bold"
+          );
+          break;
+        case "italic":
+          selectedTextObject.set(
+            "fontStyle",
+            selectedTextObject.fontStyle === "italic" ? "normal" : "italic"
+          );
+          break;
+        case "underline":
+          selectedTextObject.set("underline", !selectedTextObject.underline);
+          break;
+        case "strikethrough":
+          selectedTextObject.set(
+            "linethrough",
+            !selectedTextObject.linethrough
+          );
+          break;
+        default:
+          break;
+      }
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const handleTextTransformChange = (transform: string) => {
+    if (selectedTextObject) {
+      let textTransform: string = "";
+      if (transform === "uppercase") {
+        textTransform = selectedTextObject.text.toUpperCase();
+      } else if (transform === "lowercase") {
+        textTransform = selectedTextObject.text.toLowerCase();
+      }
+      selectedTextObject.set("text", textTransform);
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const handleFontFamilyChange = (fontFamily: string) => {
+    if (selectedTextObject) {
+      selectedTextObject.set("fontFamily", fontFamily);
+      canvas?.requestRenderAll();
+    }
+  };
+
   const addRect = (canvas?: fabric.Canvas) => {
     if (isLocked) {
       alert("The canvas is locked. Unlock it to add new shapes.");
@@ -777,6 +828,9 @@ const Canvas = () => {
 
         {textOptionsVisible && (
           <TextOptions
+            handleFontStyleChange={handleFontStyleChange}
+            handleTextTransformChange={handleTextTransformChange}
+            handleFontFamilyChange={handleFontFamilyChange}
             handleTextSizeChange={handleTextSizeChange}
             handleTextColorChange={handleTextColorChange}
           />
