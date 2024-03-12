@@ -15,6 +15,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import TextOptions from "@/components/TextOptions";
 
 const Canvas = () => {
   const params = useSearchParams();
@@ -31,6 +32,9 @@ const Canvas = () => {
   const [brushOpacity, setBrushOpacity] = useState(1);
   const [brushSize, setBrushSize] = useState(1);
   const canvasRef = useRef(null);
+  const [textOptionsVisible, setTextOptionsVisible] = useState(false); // State to toggle visibility of text options
+  const [selectedTextObject, setSelectedTextObject] =
+    useState<fabric.Textbox | null>(null); // State to store selected text object
 
   const images = [
     /*, the rest of your images... */
@@ -190,6 +194,50 @@ const Canvas = () => {
       canvas.dispose();
     };
   }, []);
+
+  useEffect(() => {
+    // Add event listener for selection
+    canvas?.on("selection:created", handleSelection);
+    canvas?.on("selection:updated", handleSelection);
+    canvas?.on("selection:cleared", handleSelectionCleared);
+    return () => {
+      // Remove event listener on cleanup
+      canvas?.off("selection:created", handleSelection);
+      canvas?.off("selection:updated", handleSelection);
+      canvas?.off("selection:cleared", handleSelectionCleared);
+    };
+  }, [canvas]);
+
+  const handleSelection = () => {
+    // Check if the selected object is a text box
+    const activeObject = canvas?.getActiveObject();
+    if (activeObject && activeObject.type === "textbox") {
+      setSelectedTextObject(activeObject as fabric.Textbox);
+      setTextOptionsVisible(true);
+    }
+  };
+
+  const handleSelectionCleared = () => {
+    // Reset text options when selection is cleared
+    setTextOptionsVisible(false);
+    setSelectedTextObject(null);
+  };
+
+  const handleTextSizeChange = (size: number) => {
+    if (selectedTextObject) {
+      selectedTextObject.set("fontSize", size);
+      canvas?.requestRenderAll();
+    }
+  };
+
+  const handleTextColorChange = (color: string) => {
+    const selectedObject = canvas?.getActiveObject();
+    if (selectedObject && selectedObject.type === "textbox") {
+      selectedObject.set("stroke", color);
+      selectedObject.set("fill", color);
+      canvas?.requestRenderAll();
+    }
+  };
 
   const addRect = (canvas?: fabric.Canvas) => {
     if (isLocked) {
@@ -407,8 +455,10 @@ const Canvas = () => {
     }
     const text = new fabric.Textbox("Enter text here", {
       width: 200,
+      fontSize: 40,
       height: 280,
-      stroke: "#2BEBC8",
+      stroke: "#000",
+      fill: "#000",
     });
     canvas?.add(text);
     canvas?.requestRenderAll();
@@ -722,6 +772,13 @@ const Canvas = () => {
             handleBrushSizeChange={handleBrushSizeChange}
             brushOpacity={brushOpacity}
             brushSize={brushSize}
+          />
+        )}
+
+        {textOptionsVisible && (
+          <TextOptions
+            handleTextSizeChange={handleTextSizeChange}
+            handleTextColorChange={handleTextColorChange}
           />
         )}
       </div>
