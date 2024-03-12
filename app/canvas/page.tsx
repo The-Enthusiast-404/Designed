@@ -802,6 +802,7 @@ const Canvas = () => {
           addText={addText}
           isLocked={isLocked}
           addQuoteTemplate={addQuoteTemplate}
+          uploadImage={handleImageUpload}
         />
       )}
 
@@ -865,7 +866,6 @@ const Canvas = () => {
       </div>
       <Button onClick={() => groupObjects(canvas)}>Group</Button>
       <Button onClick={() => ungroupObjects(canvas)}>Ungroup</Button>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
     </div>
   );
 };

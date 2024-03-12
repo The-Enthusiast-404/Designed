@@ -35,6 +35,7 @@ import {
 } from "react-icons/fa";
 
 import { IoTriangle } from "react-icons/io5";
+import { FiUpload } from "react-icons/fi";
 
 const Sidebar = ({
   canvas,
@@ -43,6 +44,7 @@ const Sidebar = ({
   addImage,
   isLocked,
   addQuoteTemplate,
+  uploadImage,
 }: {
   canvas: fabric.Canvas; // specify the type of canvas here
   toggleDrawing?: (canvas: fabric.Canvas) => void;
@@ -50,6 +52,7 @@ const Sidebar = ({
   addImage?: () => void;
   isLocked?: boolean;
   addQuoteTemplate?: () => void;
+  uploadImage?: () => void;
 }) => {
   // ...
   // const images = [
@@ -531,6 +534,40 @@ const Sidebar = ({
           </div>
         </DrawerContent>
       </Drawer>
+      <button
+        style={{
+          backgroundColor: "#4CAF50",
+          color: "white",
+          padding: "10px 20px",
+          textAlign: "center",
+          textDecoration: "none",
+
+          fontSize: "16px",
+          margin: "4px 2px",
+          cursor: "pointer",
+          border: "none",
+          borderRadius: "5px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <FiUpload style={{ marginRight: "8px" }} />
+        Upload Image
+        <input
+          type="file"
+          accept="image/*"
+          onChange={uploadImage}
+          style={{
+            opacity: "0",
+            position: "absolute",
+            left: "0",
+            top: "0",
+            width: "100%",
+            height: "100%",
+            cursor: "pointer",
+          }}
+        />
+      </button>
     </div>
   );
 };
