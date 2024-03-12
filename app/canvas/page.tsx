@@ -35,6 +35,8 @@ const Canvas = () => {
   const [textOptionsVisible, setTextOptionsVisible] = useState(false); // State to toggle visibility of text options
   const [selectedTextObject, setSelectedTextObject] =
     useState<fabric.Textbox | null>(null); // State to store selected text object
+  // Add state to hold the uploaded image file
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
 
   const images = [
     /*, the rest of your images... */
@@ -207,6 +209,31 @@ const Canvas = () => {
       canvas?.off("selection:cleared", handleSelectionCleared);
     };
   }, [canvas]);
+
+  // Function to handle image upload
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      setUploadedImage(file);
+    }
+  };
+
+  // Use the uploadedImage state to add the image to the canvas
+  useEffect(() => {
+    if (uploadedImage && canvas) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imageUrl = event.target.result;
+        fabric.Image.fromURL(imageUrl as string, (img) => {
+          img.set({ scaleX: 0.5, scaleY: 0.5 }); // Adjust scale as needed
+          canvas.add(img);
+          canvas.renderAll();
+        });
+      };
+      reader.readAsDataURL(uploadedImage);
+    }
+  }, [uploadedImage, canvas]);
 
   const handleSelection = () => {
     // Check if the selected object is a text box
@@ -838,6 +865,7 @@ const Canvas = () => {
       </div>
       <Button onClick={() => groupObjects(canvas)}>Group</Button>
       <Button onClick={() => ungroupObjects(canvas)}>Ungroup</Button>
+      <input type="file" accept="image/*" onChange={handleImageUpload} />
     </div>
   );
 };
