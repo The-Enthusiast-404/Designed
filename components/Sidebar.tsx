@@ -541,7 +541,6 @@ const Sidebar = ({
           padding: "10px 20px",
           textAlign: "center",
           textDecoration: "none",
-
           fontSize: "16px",
           margin: "4px 2px",
           cursor: "pointer",
@@ -551,22 +550,33 @@ const Sidebar = ({
           alignItems: "center",
         }}
       >
-        <FiUpload style={{ marginRight: "8px" }} />
-        Upload Image
-        <input
-          type="file"
-          accept="image/*"
-          onChange={uploadImage}
+        <div
           style={{
-            opacity: "0",
-            position: "absolute",
-            left: "0",
-            top: "0",
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             width: "100%",
             height: "100%",
-            cursor: "pointer",
           }}
-        />
+        >
+          <FiUpload style={{ marginRight: "8px" }} />
+          Upload Image
+          <input
+            type="file"
+            accept="image/*"
+            onChange={uploadImage}
+            style={{
+              opacity: "0",
+              position: "absolute",
+              left: "0",
+              top: "0",
+              width: "100%",
+              height: "100%",
+              cursor: "pointer",
+            }}
+          />
+        </div>
       </button>
     </div>
   );
