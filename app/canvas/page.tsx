@@ -57,8 +57,9 @@ const Canvas = () => {
 
   useEffect(() => {
     const canvas = new fabric.Canvas("canvas", {
-      height: Number(params.get("pageHeight")),
-      width: Number(params.get("pageWidth")),
+      height: Number(params.get("pageHeight")) * Number(params.get("scale")),
+      width: Number(params.get("pageWidth")) * Number(params.get("scale")),
+
       backgroundColor: canvasColor,
     });
 

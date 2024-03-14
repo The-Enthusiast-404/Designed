@@ -20,8 +20,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <div>
           <Navbar
-            projectName="My Project"
-            githubUrl="https://github.com/username/repo"
+            projectName="Designed"
+            githubUrl="https://github.com/dotslashbit"
           />
           {children}
         </div>
