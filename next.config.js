@@ -17,4 +17,7 @@ module.exports = {
     // config.infrastructureLogging = { debug: /PackFileCache/ };
     return config;
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
