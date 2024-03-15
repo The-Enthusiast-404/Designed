@@ -552,40 +552,41 @@ const Canvas = () => {
 
   const handleBrushChange = (brushType: string) => {
     if (!canvas) return;
+    let defaultColor = "#000000"; // Default brush color
     switch (brushType) {
       case "highlighter":
         canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
         canvas.freeDrawingBrush.width = 30; // wider brush width
-        canvas.freeDrawingBrush.color = "#ffff00"; // yellow color
+        defaultColor = "#ffff00"; // yellow color
         break;
       case "pen":
         canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
         canvas.freeDrawingBrush.width = 5; // narrower brush width
-        canvas.freeDrawingBrush.color = "#000000"; // black color
         break;
       case "pencil":
         canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
         canvas.freeDrawingBrush.width = 2; // very narrow brush width
-        canvas.freeDrawingBrush.color = "#000000"; // black color
         break;
       case "brush":
         canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
         canvas.freeDrawingBrush.width = 10; // medium brush width
-        canvas.freeDrawingBrush.color = "#000000"; // black color
         break;
       case "marker":
         canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
         canvas.freeDrawingBrush.width = 10; // medium brush width
-        canvas.freeDrawingBrush.color = "#ff0000"; // red color
+        defaultColor = "#ff0000"; // red color
         break;
       default:
         canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
         canvas.freeDrawingBrush.width = 5; // default brush width
-        canvas.freeDrawingBrush.color = "#000000"; // default brush color
         break;
     }
+
+    // Set brush color state
+    setBrushColor(defaultColor);
+
     if (canvas.freeDrawingBrush) {
-      const color = new fabric.Color(canvas.freeDrawingBrush.color);
+      const color = new fabric.Color(defaultColor);
       setBrushOpacity(color.getAlpha());
     }
     if (canvas.freeDrawingBrush) {

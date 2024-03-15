@@ -262,9 +262,6 @@ const Sidebar = ({
 
   return (
     <div className="flex flex-col justify-start items-center gap-10 bg-gray-800 p-4 border-r border-gray-800 text-white">
-      <button onClick={addQuoteTemplate} className="mb-4 font-bold text-lg">
-        <GrTemplate size={50} />
-      </button>
       <button onClick={() => toggleDrawing && toggleDrawing(canvas)}>
         <MdOutlineDraw size={64} />
       </button>
