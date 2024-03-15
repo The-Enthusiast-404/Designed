@@ -841,6 +841,12 @@ const Canvas = () => {
             <ContextMenuItem onSelect={handleCopy}>Copy</ContextMenuItem>
             <ContextMenuItem onSelect={handlePaste}>Paste</ContextMenuItem>
             <ContextMenuItem onSelect={clearCanvas}>Delete All</ContextMenuItem>
+            <ContextMenuItem onSelect={() => groupObjects(canvas)}>
+              Group
+            </ContextMenuItem>
+            <ContextMenuItem onSelect={() => ungroupObjects(canvas)}>
+              Ungroup
+            </ContextMenuItem>
           </ContextMenuContent>
         </ContextMenu>
 
@@ -865,8 +871,6 @@ const Canvas = () => {
           />
         )}
       </div>
-      <Button onClick={() => groupObjects(canvas)}>Group</Button>
-      <Button onClick={() => ungroupObjects(canvas)}>Ungroup</Button>
     </div>
   );
 };
