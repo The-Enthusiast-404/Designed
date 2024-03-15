@@ -38,11 +38,6 @@ const Canvas = () => {
   // Add state to hold the uploaded image file
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
 
-  const images = [
-    /*, the rest of your images... */
-  ];
-  // console.log(images);
-
   useEffect(() => {
     if (canvas?.isDrawingMode) {
       enableDrawing(canvas);
@@ -543,7 +538,7 @@ const Canvas = () => {
     }
     const text = new fabric.Textbox("Enter text here", {
       width: 200,
-      fontSize: 40,
+      fontSize: 12,
       height: 280,
       stroke: "#000",
       fill: "#000",
