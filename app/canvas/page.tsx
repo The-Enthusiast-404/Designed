@@ -78,8 +78,7 @@ const Canvas = () => {
       let activeObject = e.target;
 
       // Remove existing guidelines
-      guidelines.forEach((guideline) => canvas.remove(guideline));
-      guidelines.length = 0;
+      removeGuidelines();
 
       // Check against all objects on the canvas
       canvas.getObjects().forEach(function (object) {
@@ -106,37 +105,37 @@ const Canvas = () => {
           activeObject
             .set({ left: object.left - activeObject.width / 2 })
             .setCoords();
-          addGuideline(object.left, null);
+          addGuideline(object.left * canvas.getZoom(), null);
         }
         if (distanceToRightEdge < 10) {
           activeObject
             .set({ left: object.left + object.width - activeObject.width / 2 })
             .setCoords();
-          addGuideline(object.left + object.width, null);
+          addGuideline((object.left + object.width) * canvas.getZoom(), null);
         }
         if (distanceToTopEdge < 10) {
           activeObject
             .set({ top: object.top - activeObject.height / 2 })
             .setCoords();
-          addGuideline(null, object.top);
+          addGuideline(null, object.top * canvas.getZoom());
         }
         if (distanceToBottomEdge < 10) {
           activeObject
             .set({ top: object.top + object.height - activeObject.height / 2 })
             .setCoords();
-          addGuideline(null, object.top + object.height);
+          addGuideline(null, (object.top + object.height) * canvas.getZoom());
         }
         if (distanceToCenterX < 10) {
           activeObject
             .set({ left: objectPos.x - activeObject.width / 2 })
             .setCoords();
-          addGuideline(objectPos.x, null);
+          addGuideline(objectPos.x * canvas.getZoom(), null);
         }
         if (distanceToCenterY < 10) {
           activeObject
             .set({ top: objectPos.y - activeObject.height / 2 })
             .setCoords();
-          addGuideline(null, objectPos.y);
+          addGuideline(null, objectPos.y * canvas.getZoom());
         }
       });
 
@@ -171,6 +170,11 @@ const Canvas = () => {
       }
     });
 
+    // Listen to deselection or clicking outside of objects
+    canvas.on("selection:cleared", function () {
+      removeGuidelines();
+    });
+
     function addGuideline(x, y) {
       if (x !== null) {
         let line = new fabric.Line([x, 0, x, canvas.height], {
@@ -191,6 +195,11 @@ const Canvas = () => {
         guidelines.push(line);
         canvas.add(line);
       }
+    }
+
+    function removeGuidelines() {
+      guidelines.forEach((guideline) => canvas.remove(guideline));
+      guidelines.length = 0;
     }
 
     return () => {
